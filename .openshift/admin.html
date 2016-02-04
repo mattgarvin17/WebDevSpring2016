@@ -44,13 +44,58 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="http://webdev2016-garvinmatt.rhcloud.com/home">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/home">Home</a></li>
                 <li><a href="http://webdev2016-garvinmatt.rhcloud.com/profile">Profile</a></li>
-                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/admin">Admin</a></li>
+                <li class="active"><a href="http://webdev2016-garvinmatt.rhcloud.com/admin">Admin <span class="sr-only">(current)</span></a></li>
                 <li><a href="http://webdev2016-garvinmatt.rhcloud.com/forms">Forms</a></li>
             </ul>
         </div>
     </div>
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Admin</h1>
+    <h3 class="sub-header">Users</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Action</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>alice</td>
+                <td></td>
+                <td>student</td>
+                <td>
+                    <a class="glyphicon glyphicon-remove"></a>
+                    <a class="glyphicon glyphicon-pencil"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td></td>
+                <td>faculty | admin</td>
+                <td>
+                    <a class="glyphicon glyphicon-remove"></a>
+                    <a class="glyphicon glyphicon-pencil"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>charlie</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="glyphicon glyphicon-remove"></a>
+                    <a class="glyphicon glyphicon-pencil"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 
