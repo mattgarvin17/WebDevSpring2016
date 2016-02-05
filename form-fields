@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms</title>
+
+    <!-- Link to jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    <!-- Link to Bootstrap CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Link to stylesheet -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- dashboard stylesheet -->
+    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"                      aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Form Maker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/register">Register</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/login">Login</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/username">Username</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/home">Home</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/profile">Profile</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/admin">Admin</a></li>
+                <li class="active"><a href="http://webdev2016-garvinmatt.rhcloud.com/forms">Forms <span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Forms</h1>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="http://webdev2016-garvinmatt.rhcloud.com/forms">Forms</a></li>
+        <li role="presentation" class="active"><a href="http://webdev2016-garvinmatt.rhcloud.com/form-fields">Fields</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>First Name:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <input type="text" placeholder="First Name">
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>Last Name:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <input type="text" placeholder="Last Name">
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>Date of Birth:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-                                  toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Select Date
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a>Date1</a></li>
+                    <li><a>Date2</a></li>
+                    <li><a>Date3</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>Gender:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-                                  toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Select Gender
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a>Male</a></li>
+                    <li><a>Female</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>Role:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Admin
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Student
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> User
+                </label>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>License Agreement:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <div class="radio">
+                <label>
+                    <input type="radio"> Yes
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio"> No
+                </label>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <h4>Add New Field:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-5">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-                                  toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Select New Field
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                    <li><a>Single Line Text</a></li>
+                    <li><a>Date</a></li>
+                    <li><a>Dropdown</a></li>
+                    <li><a>Checkboxes</a></li>
+                    <li><a>Radio Buttons</a></li>
+                    <li><a>Paragraph Text Field</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-5">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
