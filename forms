@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms</title>
+
+    <!-- Link to jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    <!-- Link to Bootstrap CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Link to stylesheet -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- dashboard stylesheet -->
+    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"                      aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Form Maker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/register">Register</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/login">Login</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/username">Username</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/home">Home</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/profile">Profile</a></li>
+                <li><a href="http://webdev2016-garvinmatt.rhcloud.com/admin">Admin</a></li>
+                <li class="active"><a href="http://webdev2016-garvinmatt.rhcloud.com/forms">Forms <span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Forms</h1>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="http://webdev2016-garvinmatt.rhcloud.com/forms">Forms</a></li>
+        <li role="presentation"><a href="http://webdev2016-garvinmatt.rhcloud.com/form-fields">Fields</a></li>
+    </ul>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th><span class="glyphicon glyphicon-triangle-bottom"></span>Form Name</th>
+            <th><span class="glyphicon glyphicon-triangle-bottom"></span>Action</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="text" placeholder="name"></td>
+                <td>
+                    <a class="glyphicon glyphicon-plus"></a>
+                    <a class="glyphicon glyphicon-ok"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Registration Form</td>
+                <td>
+                    <a class="glyphicon glyphicon-remove"></a>
+                    <a class="glyphicon glyphicon-pencil"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Contact List</td>
+                <td>
+                    <a class="glyphicon glyphicon-remove"></a>
+                    <a class="glyphicon glyphicon-pencil"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>To Do List</td>
+                <td>
+                    <a class="glyphicon glyphicon-remove"></a>
+                    <a class="glyphicon glyphicon-pencil"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
