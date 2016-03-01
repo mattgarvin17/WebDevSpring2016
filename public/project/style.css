@@ -1,0 +1,20 @@
+.navbar-pollyanna {
+    color: indianred;
+    background-color: indianred;
+}
+
+.navbar-brand-pollyanna {
+    font-family: Chalkboard;
+    font-size: 25px;
+    color: white !important;
+}
+
+.navbar-right-pollyanna {
+    font-family: Chalkboard;
+    font-size: 18px;
+    color: white !important;
+}
+
+.pollyanna-body {
+    font-family: Chalkboard;
+}
