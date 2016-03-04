@@ -7,9 +7,9 @@
     function UsersController($scope)
     {
         $scope.users = [
-            {firstName: "Bob", lastName: "Bobson", role: "Participant", email: "bobboberson@gmail.com"},
-            {firstName: "Guy", lastName: "McGuy", role: "Participant", email: "guymcguy12@gmail.com"},
-            {firstName: "Larry", lastName: "Leadman", role: "Leader", email: "lleadman45@gmail.com"}
+            {firstName: "Bob", lastName: "Bobson", role: ["Participant"], email: "bobboberson@gmail.com"},
+            {firstName: "Guy", lastName: "McGuy", role: ["Participant"], email: "guymcguy12@gmail.com"},
+            {firstName: "Larry", lastName: "Leadman", role: ["Participant", "Leader"], email: "lleadman45@gmail.com"}
         ];
 
         $scope.addUser = addUser;

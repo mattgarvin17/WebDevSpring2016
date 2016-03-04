@@ -1,4 +1,7 @@
 (function()
 {
-    angular.module("UserApp", []);
+    angular.module("UsersApp", []);
+    angular.module("AssignmentsApp", []);
+    angular.module("GroupsApp", []);
+    angular.module("GiftsApp", []);
 })();
