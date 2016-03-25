@@ -1,0 +1,38 @@
+<div ng-controller="GroupsController" class="col-sm-10 col-md-12 main pollyanna-body">
+
+    <h1>Groups</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Leader's Email</th>
+            <th>Pollyanna Date</th>
+            <th>Price Range</th>
+            <th># of Users</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th><input ng-model="group.leaderEmail" class="form-control"/></th>
+            <th><input ng-model="group.date" class="form-control"/></th>
+            <th><input ng-model="group.range" class="form-control"/></th>
+            <th><input ng-model="group.users" class="form-control"/></th>
+            <th>
+                <button ng-click="addGroup(group)" class="btn btn-primary">Add</button>
+                <button ng-click="updateGroup(group)" class="btn btn-primary btn-success">Update</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="group in groups">
+            <td>{{group.leaderEmail}}</td>
+            <td>{{group.date}}</td>
+            <td>{{group.range}}</td>
+            <td>{{group.users}}</td>
+            <td>
+                <button ng-click="removeGroup(group)" class="btn btn-danger">Remove</button>
+                <button ng-click="selectGroup($index)" class="btn btn-info">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

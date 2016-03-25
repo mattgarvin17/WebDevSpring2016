@@ -1,0 +1,38 @@
+<div ng-controller="GiftsController" class="col-sm-10 col-md-12 main pollyanna-body">
+
+    <h1>Gift Suggestions</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User's Email</th>
+            <th>Item Name</th>
+            <th>Item Description</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th><input ng-model="giftSuggestion.email" class="form-control"/></th>
+            <th><input ng-model="giftSuggestion.itemName" class="form-control"/></th>
+            <th><input ng-model="giftSuggestion.itemDescription" class="form-control"/></th>
+            <th><input ng-model="giftSuggestion.price" class="form-control"/></th>
+            <th>
+                <button ng-click="addGiftSuggestion(giftSuggestion)" class="btn btn-primary">Add</button>
+                <button ng-click="updateGiftSuggestion(giftSuggestion)" class="btn btn-primary btn-success">Update</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="giftSuggestion in giftSuggestions">
+            <td>{{giftSuggestion.email}}</td>
+            <td>{{giftSuggestion.itemName}}</td>
+            <td>{{giftSuggestion.itemDescription}}</td>
+            <td>{{giftSuggestion.price}}</td>
+            <td>
+                <button ng-click="removeGiftSuggestion(giftSuggestion)" class="btn btn-danger">Remove</button>
+                <button ng-click="selectGiftSuggestion($index)" class="btn btn-info">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="FormBuilderApp">
+<html lang="en" ng-app="PollyannaApp">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-
-    <title>Form Builder</title>
+    <title>Pollyanna</title>
 
     <!-- Link to jQuery CDN -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -31,22 +30,27 @@
 
     <script src="app.js"></script>
     <script src="config.js"></script>
+    <script src="/home/home.controller.js"></script>
+    <script src="/users/users.controller.js"></script>
+    <script src="/gifts/gifts.controller.js"></script>
+    <script src="/groups/groups.controller.js"></script>
+    <script src="/assignments/assignments.controller.js"></script>
 
 </head>
-
 <body ng-controller="MainController">
-    <div ng-view>
-        <div ng-include="'header.view.html'"></div>
-        <div ng-include="'sidebar.view.html'"></div>
+    <div ng-include="/header/header.view.html"></div>
 
+
+    <div ng-view>
     </div>
 
+
+
     <!-- Bootstrap core JavaScript
-    ================================================== -->
+        ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-
 </body>
 </html>

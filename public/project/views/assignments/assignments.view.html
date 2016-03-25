@@ -1,0 +1,35 @@
+<div ng-controller="AssignmentsController" class="col-sm-10 col-md-12 main pollyanna-body">
+
+    <h1>Assignments</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User's Email</th>
+            <th>Assignment's Email</th>
+            <th>Leader's Email</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th><input ng-model="assignment.email" class="form-control"/></th>
+            <th><input ng-model="assignment.assignmentEmail" class="form-control"/></th>
+            <th><input ng-model="assignment.leaderEmail" class="form-control"/></th>
+            <th>
+                <button ng-click="addAssignment(assignment)" class="btn btn-primary">Add</button>
+                <button ng-click="updateAssignment(assignment)" class="btn btn-primary btn-success">Update</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="assignment in assignments">
+            <td>{{assignment.email}}</td>
+            <td>{{assignment.assignmentEmail}}</td>
+            <td>{{assignment.leaderEmail}}</td>
+            <td>
+                <button ng-click="removeAssignment(assignment)" class="btn btn-danger">Remove</button>
+                <button ng-click="selectAssignment($index)" class="btn btn-info">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
