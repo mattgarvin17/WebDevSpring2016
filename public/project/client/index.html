@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PollyannaApp">
+<head>
+
+    <-- cdn's -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"
+              integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+              crossorigin="anonymous"></script>
+    <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+              integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+              crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js"></script>
+
+    <-- my js -->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="views/header/navigation.controller.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="views/profile/profile.controller.js"></script>
+    <script src="views/register/register.controller.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Pollyanna</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Pollyanna</h1>
+        <div ng-include="'views/header/header.view.html'"></div>
+        <div ng-view></div>
+    </div>
+</body>
+</html>
