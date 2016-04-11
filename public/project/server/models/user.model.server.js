@@ -1,5 +1,3 @@
-var mock = require("./user.mock.json");
-
 // load q promise library
 var q = require("q");
 

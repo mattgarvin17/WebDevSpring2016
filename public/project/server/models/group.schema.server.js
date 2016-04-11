@@ -1,0 +1,18 @@
+module.exports = function(mongoose) {
+
+    // use mongoose to declare a group schema
+    var GroupSchema = mongoose.Schema({
+        _id: String,
+        groupName: String,
+        // userID of leader
+        groupLeader: String,
+        // list of userID's
+        members: [String],
+        eventDate: String,
+        priceRange: String
+
+    }, {collection: 'pollyanna.group'});
+
+    return GroupSchema;
+
+};
