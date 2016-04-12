@@ -5,7 +5,7 @@ var q = require("q");
 module.exports = function(db, mongoose) {
 
     // load assignment schema
-    var AssignmentSchema = require("./invite.schema.server.js")(mongoose);
+    var AssignmentSchema = require("./assignment.schema.server.js")(mongoose);
 
     // create assignment model from schema
     var AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
