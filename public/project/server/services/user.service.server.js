@@ -2,11 +2,11 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 
-module.exports = function(app) {
-    var userModel = require('../../models/user.model.server.js')();
+module.exports = function(app, userModel) {
+    //var userModel = require('WebDevSpring2016/public/project/server/models/user.model.server.js')();
     var auth = authorized;
 
-    app.post("/api/pollyanna/login", login);
+    app.post("/api/pollyanna/login", passport.authenticate('local'), login);
     app.get("/api/pollyanna/loggedin", loggedin);
     app.post("/api/pollyanna/logout", logout);
     app.post("/api/pollyanna/register", register);
@@ -16,9 +16,9 @@ module.exports = function(app) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-    function localStrategy(email, password, done) {
+    function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({email: email, password: password})
+            .findUserByCredentials({email: username, password: password})
             .then(
                 function(user) {
                     if (!user) { return done(null, false); }
@@ -71,18 +71,36 @@ module.exports = function(app) {
     }
 
     function register(req, res) {
-        var user = req.body;
+        var newUser = req.body;
+        newUser.roles = ['standard'];
 
-        user = userModel.createUser(user)
-            // handle model promise
+        userModel
+            .findUserByEmail(newUser.email)
             .then(
-                // login user if promise resolved
-                function ( doc ) {
-                    req.session.currentUser = doc;
-                    res.json(user);
+                function(user){
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return userModel.createUser(newUser);
+                    }
                 },
-                // send error if promise rejected
-                function ( err ) {
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             );
@@ -101,5 +119,20 @@ module.exports = function(app) {
     function logout(req, res) {
         req.logOut();
         res.send(200);
+    }
+
+    function isAdmin(user) {
+        if(user.roles.indexOf("admin") > 0) {
+            return true
+        }
+        return false;
+    }
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
     }
 }

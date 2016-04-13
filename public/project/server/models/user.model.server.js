@@ -15,6 +15,7 @@ module.exports = function(db, mongoose) {
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
+        findUserByEmail: findUserByEmail
     };
     return api;
 
@@ -40,6 +41,19 @@ module.exports = function(db, mongoose) {
     function findUserById(userId) {
         var deferred = q.defer();
         UserModel.findById(userId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
+
+    // use user model find by id
+    function findUserByEmail(email) {
+        var deferred = q.defer();
+        UserModel.findOne(email, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {

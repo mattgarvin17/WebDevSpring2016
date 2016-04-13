@@ -3,7 +3,7 @@
         .module("PollyannaApp")
         .controller("LoginController", loginController);
 
-    function loginController(UserService, $location) {
+    function loginController(UserService, $location, $rootScope) {
         var vm = this;
 
         vm.login = login;
@@ -12,21 +12,24 @@
         }
         init();
 
-        function login(user) {
-            if(!user) {
-                return;
-            }
-            UserService
-                .login({
-                    email: user.email,
-                    password: user.password
-                })
-                .then(function(response){
-                    if(response.data) {
-                        UserService.setCurrentUser(response.data);
-                        $location.url("/profile");
-                    }
-                });
+        function login(user)
+        {
+            if(user)
+                UserService
+                    .login({
+                        username: user.email,
+                        password: user.password
+                    })
+                    .then(
+                        function(response)
+                        {
+                            $rootScope.currentUser = response.data;
+                            $location.url("/profile");
+                        },
+                        function(err) {
+                            $scope.error = err;
+                        }
+                    );
         }
     }
 })();
