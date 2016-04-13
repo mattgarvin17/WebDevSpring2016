@@ -79,7 +79,7 @@ module.exports = function(db, mongoose) {
         UserModel.findOne(
 
             // first argument is predicate
-            { username: credentials.email,
+            { email: credentials.email,
                 password: credentials.password },
 
             // doc is unique instance matches predicate

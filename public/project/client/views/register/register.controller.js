@@ -14,15 +14,25 @@
         init();
 
         function register(user) {
-            UserService
-                .register(user)
-                .then(function(response){
-                    var currentUser = response.data;
-                    if(currentUser != null) {
-                        UserService.setCurrentUser(currentUser);
-                        $location.url("/profile");
-                    }
-                });
+            if (user.password == user.password2) {
+                user.roles = ['standard'];
+                user.groups = [];
+                user.gifts = [];
+                user.assignments = [];
+                delete user.password2;
+                UserService
+                    .register(user)
+                    .then(function (response) {
+                        var currentUser = response.data;
+                        if (currentUser != null) {
+                            UserService.setCurrentUser(currentUser);
+                            $location.url("/profile");
+                        }
+                    });
+            }
+            else {
+                $rootScope.errorMessage = "Passwords do not match.";
+            }
         }
     }
 })();

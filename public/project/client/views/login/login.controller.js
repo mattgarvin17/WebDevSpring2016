@@ -18,7 +18,7 @@
             }
             UserService
                 .login({
-                    username: user.email,
+                    email: user.email,
                     password: user.password
                 })
                 .then(function(response){

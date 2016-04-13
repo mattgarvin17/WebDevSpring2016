@@ -1,9 +1,52 @@
-module.exports = function(app, userModel) {
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+
+module.exports = function(app) {
+    var userModel = require('../../models/user.model.server.js')();
+    var auth = authorized;
+
     app.post("/api/pollyanna/login", login);
     app.get("/api/pollyanna/loggedin", loggedin);
     app.post("/api/pollyanna/logout", logout);
     app.post("/api/pollyanna/register", register);
     app.get("/api/pollyanna/profile/:userId", profile);
+
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function localStrategy(email, password, done) {
+        userModel
+            .findUserByCredentials({email: email, password: password})
+            .then(
+                function(user) {
+                    if (!user) { return done(null, false); }
+                    return done(null, user);
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
 
     function profile(req, res) {
         var userId = req.params.userId;
@@ -45,28 +88,18 @@ module.exports = function(app, userModel) {
             );
     }
 
+
     function login(req, res) {
-        var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentials)
-            .then(
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
-                },
-                // send error if promise rejected
-                function ( err ) {
-                    res.status(400).send(err);
-                }
-            )
+        var user = req.user;
+        res.json(user);
     }
 
     function loggedin(req, res) {
-        // just return the user of the current session, null otherwise
-        res.json(req.session.currentUser);
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function logout(req, res) {
-        req.session.destroy();
+        req.logOut();
         res.send(200);
     }
 }
