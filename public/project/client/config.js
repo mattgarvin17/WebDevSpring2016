@@ -3,68 +3,98 @@
         .module("PollyannaApp")
         .config(configuration);
 
-    function configuration($routeProvider) {
+    function configuration($routeProvider, $httpProvider) {
         $routeProvider
-            .when("/home", {
-                templateUrl: "views/home/home.view.html",
+            .when('/home', {
+                templateUrl: 'views/home/home.view.html',
+                controller: 'HomeController',
+                controllerAs: 'model',
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    loggedin: checkCurrentUser
                 }
             })
-            .when("/login", {
-                templateUrl: "views/login/login.view.html",
-                controller: "LoginController",
-                controllerAs: "model"
-            })
-            .when("/register", {
-                templateUrl: "views/register/register.view.html",
-                controller: "RegisterController",
-                controllerAs: "model"
-            })
-            .when("/profile/:username?", {
-                templateUrl: "views/profile/profile.view.html",
-                controller: "ProfileController",
-                controllerAs: "model",
+            .when('/profile', {
+                templateUrl: 'views/profile/profile.view.html',
+                controller: 'ProfileController',
+                controllerAs: 'model',
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    loggedin: checkLoggedin
                 }
+            })
+            .when('/login', {
+                templateUrl: 'views/login/login.view.html',
+                controller: 'LoginController',
+                controllerAs: 'model'
+            })
+            .when('/register', {
+                templateUrl: 'views/register/register.view.html',
+                controller: 'RegisterController',
+                controllerAs: 'model'
             })
             .otherwise({
-                redirectTo: "/home"
+                redirectTo: '/home'
             });
     }
 
-    function getLoggedIn(UserService, $q) {
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response){
-                var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
+        $http.get('/api/pollyanna/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentUser = user;
                 deferred.resolve();
-            });
+            }
+        });
 
         return deferred.promise;
-    }
+    };
 
-    function checkLoggedIn(UserService, $q, $location) {
 
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response) {
-                var currentUser = response.data;
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    $location.url("/home");
-                }
-            });
+        $http.get('/api/pollyanna/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
 
         return deferred.promise;
-    }
+    };
+
+    var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/pollyanna/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
+            }
+            deferred.resolve();
+        });
+
+        return deferred.promise;
+    };
 })();

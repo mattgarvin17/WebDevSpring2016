@@ -3,9 +3,9 @@
         .module("PollyannaApp")
         .controller("ProfileController", profileController);
 
-    function profileController(UserService, $location, $routeParams) {
+    function profileController(UserService, $location, $routeParams, $rootScope) {
         var vm = this;
-        
+        vm.currentUser = $rootScope.currentUser;
         // using email as username
         //var username = $routeParams.email;
         //console.log(username);
