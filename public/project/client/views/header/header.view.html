@@ -5,6 +5,10 @@
             ng-show="currentUser">
             <a href="#/profile">Profile</a>
         </li>
+        <li ng-class="{'active': model.$location.url().indexOf('/admin')>=0}"
+            ng-show="currentUser && currentUser.roles.indexOf('admin') != -1">
+            <a href="#/admin/home">Admin</a>
+        </li>
         <li ng-show="currentUser">
             <a ng-click="model.logout()">Logout</a>
         </li>
@@ -17,4 +21,13 @@
             <a href="#/login">Login</a>
         </li>
     </ul>
+    <span ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': model.$location.url() == '/assignments'}"><a href="#/home">Assignments</a></li>
+            <li ng-class="{'active': model.$location.url() == '/gifts'}"><a href="#/home">Gifts</a></li>
+            <li ng-class="{'active': model.$location.url() == '/groups'}"><a href="#/home">Groups</a></li>
+            <li ng-class="{'active': model.$location.url() == '/invites'}"><a href="#/home">Invites</a></li>
+            <li ng-class="{'active': model.$location.url() == '/users'}"><a href="#/home">Users</a></li>
+        </ul>
+    </span>
 </nav>

@@ -50,10 +50,10 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    // use user model find by id
+    // use user model find by email
     function findUserByEmail(email) {
         var deferred = q.defer();
-        UserModel.findOne(email, function (err, doc) {
+        UserModel.findOne({email: email}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
