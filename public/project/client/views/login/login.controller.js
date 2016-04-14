@@ -24,10 +24,11 @@
                         function(response)
                         {
                             $rootScope.currentUser = response.data;
-                            $location.url("/profile");
+                            $location.url("/home");
                         },
                         function(err) {
-                            $scope.error = err;
+                            vm.error = err;
+                            $rootScope.errorMessage = "Invalid email/password combination."
                         }
                     );
         }

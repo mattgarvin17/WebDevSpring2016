@@ -1,7 +1,11 @@
 <h2>Home</h2>
 
+<div class="alert alert-warning" ng-show="cleverMessage">
+    <strong>I see what you did there.</strong> {{cleverMessage}}
+</div>
+
 <p ng-if="currentUser">
-    Welcome back, {{currentUser.firstName}}!
+    Welcome, {{currentUser.firstName}}!
 </p>
 
 <p>

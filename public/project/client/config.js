@@ -31,6 +31,14 @@
                 controller: 'RegisterController',
                 controllerAs: 'model'
             })
+            .when('/admin-home', {
+                templateUrl: 'views/admin/home/admin.home.view.html',
+                controller: 'AdminHomeController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkAdmin
+                }
+            })
             .otherwise({
                 redirectTo: '/home'
             });
@@ -49,11 +57,16 @@
                 $rootScope.currentUser = user;
                 deferred.resolve();
             }
+            else if (user !== '0')
+            {
+                $rootScope.cleverMessage = "Don't try to be clever, " + user.firstName + ". You know you can't go there.";
+                $location.url('/home');
+                deferred.resolve();
+            }
         });
 
         return deferred.promise;
     };
-
 
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
     {

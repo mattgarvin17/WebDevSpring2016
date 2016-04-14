@@ -13,37 +13,42 @@
         init();
 
         function register(user) {
-            if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.email))) {
+            if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) && user.email) {
                 if (user.password == user.password2 || !user.password || !user.password2) {
-                    newUser.roles = ['standard'];
-                    newUser.groups = [];
-                    newUser.gifts = [];
-                    newUser.assignments = [];
-                    newUser.email = user.email;
-                    newUser.password = user.password;
-                    newUser.firstName = user.firstName;
-                    newUser.lastName = user.lastName;
-                    UserService
-                        .register(newUser)
-                        .then(
-                            function(response) {
-                                var user = response.data;
-                                if(user != null) {
-                                    $rootScope.currentUser = user;
-                                    $location.url("/profile");
+                    if (user.firstName && user.lastName) {
+                        newUser.roles = ['standard'];
+                        newUser.groups = [];
+                        newUser.gifts = [];
+                        newUser.assignments = [];
+                        newUser.email = user.email;
+                        newUser.password = user.password;
+                        newUser.firstName = user.firstName;
+                        newUser.lastName = user.lastName;
+                        UserService
+                            .register(newUser)
+                            .then(
+                                function (response) {
+                                    var user = response.data;
+                                    if (user != null) {
+                                        $rootScope.currentUser = user;
+                                        $location.url("/home");
+                                    }
+                                },
+                                function (err) {
+                                    vm.error = err;
                                 }
-                            },
-                            function(err) {
-                                vm.error = err;
-                            }
-                        );
+                            );
+                    }
+                    else {
+                        $rootScope.errorMessage = "You must enter a first and last name.";
+                    }
                 }
                 else {
-                    alert("Passwords do not match.");
+                    $rootScope.errorMessage = "Passwords do not match.";
                 }
             }
             else {
-                alert("Email address is invalid.");
+                $rootScope.errorMessage = "Email address is invalid.";
             }
 
         }

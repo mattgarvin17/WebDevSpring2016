@@ -1,5 +1,9 @@
 <h2>Login</h2>
 
+<div ng-show="errorMessage" class="alert alert-danger">
+    <strong>Error:</strong> {{errorMessage}}
+</div>
+
 <input ng-model="model.user.email"
        type="email"
        class="form-control"

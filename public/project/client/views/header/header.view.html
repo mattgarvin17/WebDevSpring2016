@@ -15,23 +15,23 @@
                 <!-- navbar has duplicated links to fix non-collapsed view animation glitch -->
                 <li ng-class="{'active': model.$location.url().indexOf('/admin')>=0}"
                     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
-                    <a class="hidden-xs" href="#/admin/home">Admin</a>
+                    <a class="hidden-xs" href="#/admin-home">Admin</a>
                 </li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/assignments'}">
-                    <a class="hidden-xs" href="#/home">Assignments</a></li>
+                    <a class="hidden-xs" href="#/admin-assignments">Assignments</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/gifts'}">
-                    <a class="hidden-xs" href="#/home">Gifts</a></li>
+                    <a class="hidden-xs" href="#/admin-gifts">Gifts</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/groups'}">
-                    <a class="hidden-xs" href="#/home">Groups</a></li>
+                    <a class="hidden-xs" href="#/admin-groups">Groups</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/invites'}">
-                    <a class="hidden-xs" href="#/home">Invites</a></li>
+                    <a class="hidden-xs" href="#/admin-invites">Invites</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/users'}">
-                    <a class="hidden-xs" href="#/home">Users</a></li>
+                    <a class="hidden-xs" href="#/admin-users">Users</a></li>
                 <li ng-class="{'active': model.$location.url() == '/home'}">
                     <a class="hidden-xs" href="#/home">Home</a></li>
                 <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
@@ -53,23 +53,23 @@
                 <!-- Duplicated for collapsed view -->
                 <li ng-class="{'active': model.$location.url().indexOf('/admin')>=0}"
                     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
-                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin/home">Admin</a>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-home">Admin</a>
                 </li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/assignments'}">
-                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Assignments</a></li>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-assignments">Assignments</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/gifts'}">
-                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Gifts</a></li>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-gifts">Gifts</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/groups'}">
-                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Groups</a></li>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-groups">Groups</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/invites'}">
-                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Invites</a></li>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-invites">Invites</a></li>
                 <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
                         ng-class="{'active': model.$location.url() == '/users'}">
-                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Users</a></li>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-users">Users</a></li>
                 <li ng-class="{'active': model.$location.url() == '/home'}">
                     <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Home</a></li>
                 <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
