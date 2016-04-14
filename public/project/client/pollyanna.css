@@ -5,3 +5,11 @@ a {
 body {
     padding-top: 50px;
 }
+
+.form-control {
+    margin-top: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+}
