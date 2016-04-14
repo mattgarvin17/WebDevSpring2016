@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="PollyannaApp">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- cdn's -->
 
@@ -14,6 +17,9 @@
               crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
 
     <!-- my js -->
     <script src="app.js"></script>
@@ -30,8 +36,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Pollyanna</h1>
-        <div ng-include="'views/header/header.view.html'"></div>
+        <!-- <h1>Pollyanna</h1> -->
+        <div ng-include="'views/header/alt.header.view.html'"></div>
         <div ng-view></div>
     </div>
 </body>
