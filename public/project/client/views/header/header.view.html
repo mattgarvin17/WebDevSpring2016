@@ -1,33 +1,93 @@
-<nav ng-controller="NavigationController as model">
-    <ul class="nav nav-pills">
-        <li ng-class="{'active': model.$location.url() == '/home'}"><a href="#/home">Home</a></li>
-        <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
-            ng-show="currentUser">
-            <a href="#/profile">Profile</a>
-        </li>
-        <li ng-class="{'active': model.$location.url().indexOf('/admin')>=0}"
-            ng-show="currentUser && currentUser.roles.indexOf('admin') != -1">
-            <a href="#/admin/home">Admin</a>
-        </li>
-        <li ng-show="currentUser">
-            <a ng-click="model.logout()">Logout</a>
-        </li>
-        <li ng-class="{'active': model.$location.url() == '/register'}"
-            ng-hide="currentUser">
-            <a href="#/register">Register</a>
-        </li>
-        <li ng-class="{'active': model.$location.url() == '/login'}"
-            ng-hide="currentUser">
-            <a href="#/login">Login</a>
-        </li>
-    </ul>
-    <span ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
-        <ul class="nav nav-tabs">
-            <li ng-class="{'active': model.$location.url() == '/assignments'}"><a href="#/home">Assignments</a></li>
-            <li ng-class="{'active': model.$location.url() == '/gifts'}"><a href="#/home">Gifts</a></li>
-            <li ng-class="{'active': model.$location.url() == '/groups'}"><a href="#/home">Groups</a></li>
-            <li ng-class="{'active': model.$location.url() == '/invites'}"><a href="#/home">Invites</a></li>
-            <li ng-class="{'active': model.$location.url() == '/users'}"><a href="#/home">Users</a></li>
-        </ul>
-    </span>
+<nav ng-controller="NavigationController as model" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Pollyanna</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- There must be a better way to do this -->
+                <!-- navbar has duplicated links to fix non-collapsed view animation glitch -->
+                <li ng-class="{'active': model.$location.url().indexOf('/admin')>=0}"
+                    ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
+                    <a class="hidden-xs" href="#/admin/home">Admin</a>
+                </li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/assignments'}">
+                    <a class="hidden-xs" href="#/home">Assignments</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/gifts'}">
+                    <a class="hidden-xs" href="#/home">Gifts</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/groups'}">
+                    <a class="hidden-xs" href="#/home">Groups</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/invites'}">
+                    <a class="hidden-xs" href="#/home">Invites</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/users'}">
+                    <a class="hidden-xs" href="#/home">Users</a></li>
+                <li ng-class="{'active': model.$location.url() == '/home'}">
+                    <a class="hidden-xs" href="#/home">Home</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
+                    ng-if="currentUser">
+                    <a class="hidden-xs" href="#/profile">Profile</a>
+                </li>
+                <li ng-if="currentUser">
+                    <a class="hidden-xs" ng-click="model.logout()">Logout</a>
+                </li>
+                <li ng-class="{'active': model.$location.url() == '/register'}"
+                    ng-if="!currentUser">
+                    <a class="hidden-xs" href="#/register">Register</a>
+                </li>
+                <li ng-class="{'active': model.$location.url() == '/login'}"
+                    ng-if="!currentUser">
+                    <a class="hidden-xs" href="#/login">Login</a>
+                </li>
+
+                <!-- Duplicated for collapsed view -->
+                <li ng-class="{'active': model.$location.url().indexOf('/admin')>=0}"
+                    ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin/home">Admin</a>
+                </li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/assignments'}">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Assignments</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/gifts'}">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Gifts</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/groups'}">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Groups</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/invites'}">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Invites</a></li>
+                <li     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1"
+                        ng-class="{'active': model.$location.url() == '/users'}">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Users</a></li>
+                <li ng-class="{'active': model.$location.url() == '/home'}">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/home">Home</a></li>
+                <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
+                    ng-if="currentUser">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/profile">Profile</a>
+                </li>
+                <li ng-if="currentUser">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" ng-click="model.logout()">Logout</a>
+                </li>
+                <li ng-class="{'active': model.$location.url() == '/register'}"
+                    ng-if="!currentUser">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/register">Register</a>
+                </li>
+                <li ng-class="{'active': model.$location.url() == '/login'}"
+                    ng-if="!currentUser">
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
