@@ -59,7 +59,7 @@
             }
             else if (user !== '0')
             {
-                $rootScope.cleverMessage = "Don't try to be clever, " + user.firstName + ". You know you can't go there.";
+                $rootScope.cleverMessage = "Don't be clever, " + user.firstName + ". You know you're not allowed do that.";
                 $location.url('/home');
                 deferred.resolve();
             }
