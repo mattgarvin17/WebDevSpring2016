@@ -13,7 +13,7 @@
                     loggedin: checkCurrentUser
                 }
             })
-            .when('/profile', {
+            .when('/profile/:userID', {
                 templateUrl: 'views/profile/profile.view.html',
                 controller: 'ProfileController',
                 controllerAs: 'model',
@@ -30,6 +30,14 @@
                 templateUrl: 'views/register/register.view.html',
                 controller: 'RegisterController',
                 controllerAs: 'model'
+            })
+            .when('/admin-home', {
+                templateUrl: 'views/admin/home/admin.home.view.html',
+                controller: 'AdminHomeController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkAdmin
+                }
             })
             .when('/admin-home', {
                 templateUrl: 'views/admin/home/admin.home.view.html',
@@ -68,7 +76,7 @@
         return deferred.promise;
     };
 
-    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, $routeParams)
     {
         var deferred = $q.defer();
 
@@ -79,6 +87,10 @@
             if (user !== '0')
             {
                 $rootScope.currentUser = user;
+                if ($rootScope.currentUser._id == $routeParams.userID ||
+                    $rootScope.currentUser.roles.indexOf('admin') > -1) {
+                    $rootScope.editProfile = True;
+                }
                 deferred.resolve();
             }
             // User is Not Authenticated

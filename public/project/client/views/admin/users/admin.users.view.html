@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-controller="UsersController" class="col-sm-10 col-md-12 main pollyanna-body">
 
-</body>
-</html>
+    <h1>Users</h1>
+    <p>Please be careful not to delete yourself, {{currentUser.firstName}}. Especially if you don't know another admin.</p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Roles</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <th><input ng-model="user.firstName" class="form-control"/></th>
+            <th><input ng-model="user.lastName" class="form-control"/></th>
+            <th><input ng-model="user.roles" class="form-control"/></th>
+            <th><input ng-model="user.email" class="form-control"/></th>
+            <th><input ng-model="user.password" class="form-control"/></th>
+
+            <th>
+                <button ng-click="addUser(user)" class="btn btn-primary">Add</button>
+                <button ng-click="updateUser(user)" class="btn btn-primary btn-success">Update</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.roles}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
+            <td>
+                <button ng-click="removeUser(user)" class="btn btn-danger">Remove</button>
+                <button ng-click="selectUser($index)" class="btn btn-info">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

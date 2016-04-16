@@ -36,7 +36,7 @@
                     <a class="hidden-xs" href="#/home">Home</a></li>
                 <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
                     ng-if="currentUser">
-                    <a class="hidden-xs" href="#/profile">Profile</a>
+                    <a class="hidden-xs" href="#/profile/{{currentUser._id}}">Profile</a>
                 </li>
                 <li ng-if="currentUser">
                     <a class="hidden-xs" ng-click="model.logout()">Logout</a>

@@ -17,9 +17,6 @@
                 if (user.password == user.password2 || !user.password || !user.password2) {
                     if (user.firstName && user.lastName) {
                         newUser.roles = ['standard'];
-                        newUser.groups = [];
-                        newUser.gifts = [];
-                        newUser.assignments = [];
                         newUser.email = user.email;
                         newUser.password = user.password;
                         newUser.firstName = user.firstName;

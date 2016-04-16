@@ -10,7 +10,8 @@
             login: login,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            getProfile: getProfile
+            getProfile: getProfile,
+            updateUser: updateUser
         };
         return api;
 
@@ -37,6 +38,9 @@
         function logout() {
             return $http.post("/api/pollyanna/logout");
         }
-
+        
+        function updateUser(user) {
+            return $http.post("/api/pollyanna/updateUser", user);
+        }
     }
 })();

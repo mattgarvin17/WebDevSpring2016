@@ -2,7 +2,6 @@ module.exports = function(mongoose) {
 
     // use mongoose to declare a group schema
     var InviteSchema = mongoose.Schema({
-        _id: String,
         // userID of group leader
         fromUser: String,
         // userID of invited user

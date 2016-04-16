@@ -1,3 +1,26 @@
-<h2>Profile</h2>
+<div class="container">
+    <button ng-click="model.edit();" class="pull-right btn btn-primary">Edit</button>
+</div>
 
-<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+<div ng-show="editProfile">
+    <p>Testing testing 123</p>
+</div>
+
+<div class="container">
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <img class="featurette-image img-responsive center-block" src="./views/profile/christmas_tree.png"
+                 width="450px" height="450px" alt="Profile Picture">
+        </div>
+        <div class="col-md-5">
+            <h2 class="featurette-heading">{{currentUser.firstName}} {{currentUser.lastName}}<span class="text-muted">&nbsp; {{currentUser.email}}</span></h2>
+            <p class="lead">This is your profile, {{currentUser.firstName}}. This is what people in Pollyanna groups with you can see.
+                If you're looking for your groups, invites, or assignments, check out the corresponding links above!
+                If you'd like to change anything, including your password, just click the 'Edit' button below.
+                When you're done, click the 'Save' button to save your changes.</p>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+</div>
+
