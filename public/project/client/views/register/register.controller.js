@@ -30,6 +30,10 @@
                                         $rootScope.currentUser = user;
                                         $location.url("/home");
                                     }
+                                    else {
+                                        $rootScope.errorMessage = "A user with that email address already exists."
+                                    }
+
                                 },
                                 function (err) {
                                     vm.error = err;

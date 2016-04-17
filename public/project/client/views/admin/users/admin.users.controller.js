@@ -1,55 +1,60 @@
+"use strict";
+
 (function()
 {
     angular
         .module("PollyannaApp")
-        .controller("UsersController", UsersController);
+        .controller("AdminUsersController", AdminUsersController);
 
-    function UsersController(UserService, $rootScope, $location)
+    function AdminUsersController(UserService, $rootScope)
     {
         var vm = this;
+        vm.currentUser = $rootScope.currentUser;
 
-        vm.addUser = addUser;
+        vm.createUser = createUser;
         vm.removeUser = removeUser;
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
 
-        function updateUser(user)
-        {
-            vm.users[vm.selectedUserIndex] = {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                roles: user.roles,
-                email: user.email,
-                password: user.password
-            };
+        function init() {
+            UserService
+                .findAllUsers()
+                .then(handleSuccess, handleError);
         }
-
-        function selectUser(index)
-        {
-            $scope.selectedUserIndex = index;
-            $scope.user = {
-                firstName: $scope.users[index].firstName,
-                lastName: $scope.users[index].lastName,
-                role: $scope.users[index].role,
-                email: $scope.users[index].email
-            };
-        }
+        init();
 
         function removeUser(user)
         {
-            var index = $scope.users.indexOf(user);
-            $scope.users.splice(index, 1);
+            UserService
+                .deleteUser(user._id)
+                .then(handleSuccess, handleError);
         }
 
-        function addUser(user)
+        function updateUser(user)
         {
-            var newUser = {
-                firstName: user.firstName,
-                lastName:  user.lastName,
-                role:      user.role,
-                email:     user.email
-            };
-            $scope.users.push(newUser);
+            UserService
+                .updateUser(user._id, user)
+                .then(handleSuccess, handleError);
+        }
+
+        function createUser(user)
+        {
+            UserService
+                .createUser(user)
+                .then(handleSuccess, handleError);
+        }
+
+        function selectUser(user)
+        {
+            vm.user = angular.copy(user);
+        }
+
+        function handleSuccess(response) {
+            vm.users = response.data;
+        }
+
+        function handleError(error) {
+            vm.error = error;
         }
     }
 })();

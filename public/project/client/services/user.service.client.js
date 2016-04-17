@@ -10,15 +10,29 @@
             login: login,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            getProfile: getProfile,
-            updateUser: updateUser
+            createUser: createUser,
+            updateUser: updateUser,
+            deleteUser: deleteUser,
+            findAllUsers: findAllUsers,
+            findUserById: findUserById,
+            findUsersByIds: findUsersByIds,
+            findUserByEmail: findUserByEmail
+
         };
         return api;
 
-        function getProfile() {
-            return $http.get("/api/pollyanna/profile/"+$rootScope.currentUser._id);
+        function findUserByEmail(userEmail) {
+            return $http.get("/api/pollyanna/user/email", userEmail);
         }
 
+        function findUsersByIds(userIDs) {
+            return $http.get("/api/pollyanna/user/array", userIDs);
+        }
+
+        function findUserById(userID) {
+            return $http.get("/api/pollyanna/user/"+userID);
+        }
+        
         function getCurrentUser() {
             return $http.get("/api/pollyanna/loggedin");
         }
@@ -38,9 +52,21 @@
         function logout() {
             return $http.post("/api/pollyanna/logout");
         }
-        
-        function updateUser(user) {
-            return $http.post("/api/pollyanna/updateUser", user);
+
+        function createUser(user) {
+            return $http.post("api/pollyanna/user", user);
+        }
+
+        function updateUser(userID, user) {
+            return $http.put("/api/pollyanna/user/"+userID, user);
+        }
+
+        function deleteUser(userId) {
+            return $http.delete("/api/pollyanna/user/"+userId);
+        }
+
+        function findAllUsers() {
+            return $http.get("/api/pollyanna/user");
         }
     }
 })();

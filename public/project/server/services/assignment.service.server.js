@@ -1,75 +1,141 @@
+var mongoose = require('mongoose');
+
 module.exports = function(app, assignmentModel) {
-    app.post("/api/pollyanna/newAssignment", newAssignment);
-    app.get("/api/pollyanna/user/:userId/assignments", allUserAssignments);
-    app.get("/api/pollyanna/group/:groupId/assignments", allGroupAssignments);
-    app.get("/api/pollyanna/assignment/:assignmentId", getAssignment);
+    
+    app.post("api/pollyanna/assignment", createAssignment); 
+    app.put("/api/pollyanna/assignment/:id", updateAssignment);
+    app.delete("/api/pollyanna/assignment/:id", deleteAssignment);
+    app.get("/api/pollyanna/assignment", findAllAssignments);
+    app.get("/api/pollyanna/assignment/:id", findAssignmentById);
+    app.get("/api/pollyanna/assignment/group/:groupID", findAllAssignmentsByGroupId);
+    app.get("/api/pollyanna/assignment/giver/:giverID", findAllAssignmentsByGiverId);
 
-    function newAssignment(req, res) {
-        var assignment = req.body;
+ 
+    function createAssignment(req, res) {
+        var newAssignment = req.body;
 
-        assignment = assignmentModel.createAssignment(assignment)
-            // handle model promise
+        assignmentModel.findAssignmentByGroupAndReceiver(newAssignment.groupID, newAssignment.receiverID)
             .then(
-                // return group if promise resolved
-                function (doc) {
-                    assignment = doc;
+                function(invite) {
+                    if (!invite) {
+                        res.json(null);
+                    }
+                    else {
+                        assignmentModel.createAssignment(newAssignment)
+                            .then(
+                                function(assignment){
+                                    return assignmentModel.findAllAssignments();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            )
+                            .then(
+                                function(assignments){
+                                    res.json(assignments);
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+
+                    }
                 },
-                // send error if promise rejected
-                function (err) {
+                function(err) {
                     res.status(400).send(err);
                 }
             );
     }
 
-    function allUserAssignments(req, res) {
-        var userId = req.params.userId;
-        var assignments = null;
-
-        assignmentModel.findAllAssignmentsByUserId(userId)
+    function updateAssignment(req, res) {
+        var newAssignment = req.body;
+        
+        assignmentModel.updateAssignment(req.params.id, newAssignment)
             .then(
-                function (doc) {
-                    assignments = doc;
+            function(assignment){
+                return assignmentModel.findAllAssignments();
+            },
+            function(err){
+                res.status(400).send(err);
+            }
+            )
+            .then(
+                function(assignments){
+                    res.json(assignments);
                 },
-
-                // reject promise if error
-                function (err) {
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+        
+    }
+    
+    function deleteAssignment(req, res) {
+        assignmentModel
+            .removeAssignment(req.params.id)
+            .then(
+                function(assignment){
+                    return assignmentModel.findAllAssignments();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(assignments){
+                    res.json(assignments);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+    
+    function findAllAssignments(req, res) {
+        assignmentModel.findAllAssignments()
+            .then(
+                function(assignments){
+                    res.json(assignments);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+    
+    function findAssignmentById(req, res) {
+        assignmentModel.findAssignmentById(req.params.id)
+            .then(
+                function(assignment){
+                    res.json(assignment);
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             )
     }
 
-    function allGroupAssignments(req, res) {
-        var groupId = req.params.groupId;
-        var assignments = null;
-
-        assignmentModel.findAllAssignmentsByGroupId(groupId)
+    function findAllAssignmentsByGroupId(req, res) {
+        assignmentModel.findAllAssignmentsByGroupId(req.params.groupID)
             .then(
-                function (doc) {
-                    assignments = doc;
+                function(assignments){
+                    res.json(assignments);
                 },
-
-                // reject promise if error
-                function (err) {
+                function(err){
                     res.status(400).send(err);
                 }
             )
     }
 
-    function getAssignment(req, res) {
-        var assignmentId = req.params.assignmentId;
-        var assignment = null;
-
-        assignmentModel.findAssignmentById(assignmentId)
+    function findAllAssignmentsByGiverId(req, res) {
+        assignmentModel.findAllAssignmentsByGiverId(req.params.giverID)
             .then(
-                function (doc) {
-                    assignment = doc;
+                function(assignments){
+                    res.json(assignments);
                 },
-
-                // reject promise if error
-                function (err) {
+                function(err){
                     res.status(400).send(err);
                 }
             )
     }
-
 }

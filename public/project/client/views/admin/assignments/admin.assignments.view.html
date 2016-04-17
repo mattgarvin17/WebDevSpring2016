@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h1>Assignments</h1>
+<p>Here are all the assignments, {{currentUser.firstName}}. These are generated automatically, but changing them here will let you override that.
+    Note that if a user has already been assigned to someone for a particular group, you will be unable to assign that user to someone else
+    until you delete the first assignment. You'll also need to know the
+ID's of the groups and users if you want to create new ones, because an assignment is just a simple group ID, giver ID, and receiver ID
+(giver and receiver are both users). The names are just there for readability. If you just want to see the assignments for a particular group or user, you may prefer to navigate to that
+group page or user profile, respectively.</p>
 
-</body>
-</html>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Assignment ID</th>
+        <th>Group ID</th>
+        <th>Group Name</th>
+        <th>Giver ID</th>
+        <th>Giver Name</th>
+        <th>Receiver ID</th>
+        <th>Receiver Name</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <th>&nbsp;</th>
+        <th><input ng-model="assignment.groupID" class="form-control"/></th>
+        <th>&nbsp;</th>
+        <th><input ng-model="assignment.giverID" class="form-control"/></th>
+        <th>&nbsp;</th>
+        <th><input ng-model="assignment.receiverID" class="form-control"/></th>
+        <th>&nbsp;</th>
+        <th>
+            <button ng-click="createAssignment(assignment)" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        </th>
+        <th>
+            <button ng-click="updateAssignment(assignment)" class="btn btn-success">
+                &check;</button>
+
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="assignment in assignments">
+        <td>{{assignment._id}}</td>
+        <td>{{assignment.groupID}}</td>
+        <td>{{assignment.groupName}}</td>
+        <td>{{assignment.giverID}}</td>
+        <td>{{assignment.giverName}}</td>
+        <td>{{assignment.receiverID}}</td>
+        <td>{{assignment.receiverName}}</td>
+        <td>
+            <button ng-click="removeAssignment(assignment)" class="btn btn-danger">X</button>
+        </td>
+        <td>
+            <button ng-click="selectAssignment(assignment)" class="btn btn-info">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

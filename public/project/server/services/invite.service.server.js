@@ -1,57 +1,142 @@
+var mongoose = require('mongoose');
+
 module.exports = function(app, inviteModel) {
-    app.post("/api/pollyanna/newInvite", newInvite);
-    app.get("/api/pollyanna/user/:userId/invites", allInvites);
-    app.get("/api/pollyanna/invite/:inviteId", getInvite);
 
-    function newInvite(req, res) {
-        var invite = req.body;
+    app.post("api/pollyanna/invite", createInvite);
+    app.put("/api/pollyanna/invite/:id", updateInvite);
+    app.delete("/api/pollyanna/invite/:id", deleteInvite);
+    app.get("/api/pollyanna/invite", findAllInvites);
+    app.get("/api/pollyanna/invite/:id", findInviteById);
+    app.get("/api/pollyanna/invite/group/:groupID", findAllInvitesByGroupId);
+    app.get("/api/pollyanna/invite/receiver/:receiverID", findAllInvitesByReceiverId);
 
-        invite = inviteModel.createInvite(invite)
-            // handle model promise
+
+    function createInvite(req, res) {
+        var newInvite = req.body;
+
+        inviteModel.findInviteByGroupAndReceiver(newInvite.groupID, newInvite.receiverID)
             .then(
-                // return group if promise resolved
-                function (doc) {
-                    invite = doc;
+                function(invite) {
+                    if (!invite) {
+                        res.json(null);
+                    }
+                    else {
+                        inviteModel.createInvite(newInvite)
+                            .then(
+                                function (invite) {
+                                    return inviteModel.findAllInvites();
+                                },
+                                function (err) {
+                                    res.status(400).send(err);
+                                }
+                            )
+                            .then(
+                                function (invites) {
+                                    res.json(invites);
+                                },
+                                function (err) {
+                                    res.status(400).send(err);
+                                }
+                            );
+                    }
                 },
-                // send error if promise rejected
-                function (err) {
+                function(err) {
                     res.status(400).send(err);
                 }
             );
     }
 
-    function allInvites(req, res) {
-        var userId = req.params.userId;
-        var invites = null;
+    function updateInvite(req, res) {
+        var newInvite = req.body;
 
-        inviteModel.findAllInvitesByUserId(userId)
+        inviteModel.updateInvite(req.params.id, newInvite)
             .then(
-                function (doc) {
-                    invites = doc;
+                function(invite){
+                    return inviteModel.findAllInvites();
                 },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(invites){
+                    res.json(invites);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
 
-                // reject promise if error
-                function (err) {
+    }
+
+    function deleteInvite(req, res) {
+        inviteModel
+            .removeInvite(req.params.id)
+            .then(
+                function(invite){
+                    return inviteModel.findAllInvites();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(invites){
+                    res.json(invites);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findAllInvites(req, res) {
+        inviteModel.findAllInvites()
+            .then(
+                function(invites){
+                    res.json(invites);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findInviteById(req, res) {
+        inviteModel.findInviteById(req.params.id)
+            .then(
+                function(invite){
+                    res.json(invite);
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             )
     }
 
-    function getInvite(req, res) {
-        var inviteId = req.params.inviteId;
-        var invite = null;
-
-        inviteModel.findInviteById(inviteId)
+    function findAllInvitesByGroupId(req, res) {
+        inviteModel.findAllInvitesByGroupId(req.params.groupID)
             .then(
-                function (doc) {
-                    invite = doc;
+                function(invites){
+                    res.json(invites);
                 },
-
-                // reject promise if error
-                function (err) {
+                function(err){
                     res.status(400).send(err);
                 }
             )
     }
 
+    function findAllInvitesByGiverId(req, res) {
+        inviteModel.findAllInvitesByGiverId(req.params.receiverID)
+            .then(
+                function(invites){
+                    res.json(invites);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    
 }

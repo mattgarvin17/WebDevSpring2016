@@ -3,11 +3,15 @@ module.exports = function(mongoose) {
     // use mongoose to declare a group schema
     var AssignmentSchema = mongoose.Schema({
         // groupID of associated group
-        group: String,
+        groupID: String,
+        groupName: String,
         // userID of giver
-        giver: String,
+        giverID: String,
+        giverName: String,
         // userID of receiver
-        receiver: String
+        receiverID: String,
+        receiverName: String
+        
 
     }, {collection: 'pollyanna.assignment'});
 

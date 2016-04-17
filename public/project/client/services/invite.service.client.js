@@ -5,23 +5,43 @@
 
     function inviteService($http, $rootScope) {
         var api = {
-            newInvite: newInvite,
-            getInvite: getInvite,
-            getAllInvitesByUserId: getAllInvitesByUserId
+            createInvite: createInvite,
+            updateInvite: updateInvite,
+            deleteInvite: deleteInvite,
+            findAllInvites: findAllInvites,
+            findInviteById: findInviteById,
+            findInvitesByGroupId: findInvitesByGroupId,
+            findInvitesByReceiverId: findInvitesByReceiverId
 
         };
         return api;
 
-        function newInvite(invite) {
-            return $http.post("/api/pollyanna/newInvite", invite);
+        function createInvite(invite) {
+            return $http.post("api/pollyanna/invite", invite);
         }
 
-        function getInvite(inviteId) {
-            return $http.get("/api/pollyanna/invite/"+inviteId)
+        function updateInvite(inviteID, invite) {
+            return $http.put("/api/pollyanna/invite/"+inviteID, invite);
         }
 
-        function getAllInvitesByUserId() {
-            return $http.get("/api/pollyanna/user/"+$rootScope.currentUser._id+"/invites")
+        function deleteInvite(inviteID) {
+            return $http.delete("/api/pollyanna/invite/"+inviteID);
+        }
+
+        function findAllInvites() {
+            return $http.get("/api/pollyanna/invite");
+        }
+
+        function findInviteById(inviteID) {
+            return $http.get("/api/pollyanna/invite/"+inviteID);
+        }
+
+        function findInvitesByGroupId(groupID) {
+            return $http.get("/api/pollyanna/invite/group/"+groupID);
+        }
+
+        function findInvitesByReceiverId(receiverID) {
+            return $http.get("/api/pollyanna/invite/receiver/"+receiverID);
         }
 
     }

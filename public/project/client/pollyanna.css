@@ -13,3 +13,9 @@ body {
 .btn {
     margin-top: 10px;
 }
+
+
+.no-wrap {
+    white-space: nowrap;
+    margin-top: 0px;
+}

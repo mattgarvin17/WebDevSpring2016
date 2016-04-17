@@ -1,8 +1,6 @@
-// load q promise library
-var q = require("q");
+var mongoose      = require("mongoose");
 
-// pass db and mongoose reference to model
-module.exports = function(db, mongoose) {
+module.exports = function() {
 
     // load assignment schema
     var AssignmentSchema = require("./assignment.schema.server.js")(mongoose);
@@ -12,79 +10,51 @@ module.exports = function(db, mongoose) {
 
     var api = {
         createAssignment: createAssignment,
+        updateAssignment: updateAssignment,
+        deleteAssignment: deleteAssignment,
+        findAllAssignments: findAllAssignments,
         findAssignmentById: findAssignmentById,
-        findAllAssignmentsByUserId: findAllAssignmentsByUserId,
-        findAllAssignmentsByGroupId: findAllAssignmentsByGroupId
+        findAllAssignmentsByGroupId: findAllAssignmentsByGroupId,
+        findAllAssignmentsByGiverId: findAllAssignmentsByGiverId,
+        findAssignmentByGroupAndReceiver: findAssignmentByGroupAndReceiver
     };
     return api;
 
-    function findAllAssignmentsByGroupId (groupId) {
-        var deferred = q.defer();
-
-        // find all assignment for given group ID
-        AssignmentModel.find({
-            group: {$in: groupId}
-        }, function (err, invites) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(invites);
-            }
-        });
-
-        return deferred.promise;
-    }
-
-    function findAllAssignmentsByUserId (userId) {
-        var deferred = q.defer();
-
-        // find all assignments for given of user ID
-        AssignmentModel.find({
-            giver: {$in: userId}
-        }, function (err, invites) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(invites);
-            }
-        });
-
-        return deferred.promise;
-    }
-
-    // use assignment model find by id
-    function findAssignmentById(assignmentId) {
-        var deferred = q.defer();
-        AssignmentModel.findById(assignmentId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
-        return deferred.promise;
-    }
-
     function createAssignment(assignment) {
-
-        // use q to defer the response
-        var deferred = q.defer();
-
-        // insert new invite with mongoose assignment model's create()
-        AssignmentModel.create(assignment, function (err, doc) {
-
-            if (err) {
-                // reject promise if error
-                deferred.reject(err);
-            } else {
-                // resolve promise
-                deferred.resolve(doc);
-            }
-
-        });
-
-        // return a promise
-        return deferred.promise;
+        return AssignmentModel.create(assignment);
     }
 
+    function updateAssignment(assignmentID, assignment) {
+        return AssignmentModel.update({_id: assignmentID}, {$set: assignment});
+    }
+
+    function deleteAssignment(assignmentID) {
+        return AssignmentModel.remove({_id: assignmentID});
+    }
+
+    function findAllAssignments() {
+        return AssignmentModel.find();
+    }
+
+    function findAssignmentById(assignmentID) {
+        return AssignmentModel.findById(assignmentID)
+    }
+
+    function findAllAssignmentsByGroupId(groupID) {
+        return AssignmentModel.find({groupID: groupID})
+    }
+
+    function findAllAssignmentsByGiverId(giverID) {
+        return AssignmentModel.find({giverID: giverID})
+    }
+
+    function findAssignmentByGroupAndReceiver(groupID, receiverID) {
+        return AssignmentModel.findOne(
+            {
+                groupID: groupID,
+                receiverID: receiverID
+            }
+        );
+    }
+    
 }

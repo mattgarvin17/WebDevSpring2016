@@ -1,8 +1,6 @@
-// load q promise library
-var q = require("q");
+var mongoose      = require("mongoose");
 
-// pass db and mongoose reference to model
-module.exports = function(db, mongoose) {
+module.exports = function() {
 
     // load user schema
     var UserSchema = require("./user.schema.server.js")(mongoose);
@@ -13,6 +11,9 @@ module.exports = function(db, mongoose) {
     var api = {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
+        removeUser: removeUser,
+        updateUser: updateUser,
+        findAllUsers: findAllUsers,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
         findUserByEmail: findUserByEmail
@@ -20,95 +21,45 @@ module.exports = function(db, mongoose) {
     return api;
 
 
-    function findUsersByIds (userIds) {
-        var deferred = q.defer();
-
-        // find all users in array of user IDs
-        UserModel.find({
-            _id: {$in: userIds}
-        }, function (err, users) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(users);
-            }
+    function findUsersByIds(userIds) {
+        return UserModel.find({
+            '_id': { $in: userIds}
         });
-
-        return deferred.promise;
     }
 
     // use user model find by id
     function findUserById(userId) {
-        var deferred = q.defer();
-        UserModel.findById(userId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
-        return deferred.promise;
+        return UserModel.findById(userId)
     }
 
     // use user model find by email
     function findUserByEmail(email) {
-        var deferred = q.defer();
-        UserModel.findOne({email: email}, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
-        return deferred.promise;
+        return UserModel.findOne({email: email});
+    }
+
+    function findAllUsers() {
+        return UserModel.find();
     }
 
     function createUser(user) {
+        return UserModel.create(user);
+    }
 
-        // use q to defer the response
-        var deferred = q.defer();
+    function updateUser(userId, user) {
+        return UserModel.update({_id: userId}, {$set: user});
+    }
 
-        // insert new user with mongoose user model's create()
-        UserModel.create(user, function (err, doc) {
-
-            if (err) {
-                // reject promise if error
-                deferred.reject(err);
-            } else {
-                // resolve promise
-                deferred.resolve(doc);
-            }
-
-        });
-
-        // return a promise
-        return deferred.promise;
+    function removeUser(userId) {
+        return UserModel.remove({_id: userId});
     }
 
     function findUserByCredentials(credentials) {
-
-        var deferred = q.defer();
-
-        // find one retrieves one document
-        UserModel.findOne(
-
-            // first argument is predicate
-            { email: credentials.email,
-                password: credentials.password },
-
-            // doc is unique instance matches predicate
-            function(err, doc) {
-
-                if (err) {
-                    // reject promise if error
-                    deferred.reject(err);
-                } else {
-                    // resolve promise
-                    deferred.resolve(doc);
-                }
-
-            });
-
-        return deferred.promise;
+        return UserModel.findOne(
+            {
+                email: credentials.email,
+                password: credentials.password
+            }
+        );
     }
+
 }

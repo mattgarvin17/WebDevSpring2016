@@ -13,7 +13,7 @@
                     loggedin: checkCurrentUser
                 }
             })
-            .when('/profile/:userID', {
+            .when('/profile/', {
                 templateUrl: 'views/profile/profile.view.html',
                 controller: 'ProfileController',
                 controllerAs: 'model',
@@ -39,9 +39,41 @@
                     loggedin: checkAdmin
                 }
             })
-            .when('/admin-home', {
-                templateUrl: 'views/admin/home/admin.home.view.html',
-                controller: 'AdminHomeController',
+            .when('/admin-users', {
+                templateUrl: 'views/admin/users/admin.users.view.html',
+                controller: 'AdminUsersController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkAdmin
+                }
+            })
+            .when('/admin-assignments', {
+                templateUrl: 'views/admin/assignments/admin.assignments.view.html',
+                controller: 'AdminAssignmentsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkAdmin
+                }
+            })
+            .when('/admin-gifts', {
+                templateUrl: 'views/admin/gifts/admin.gifts.view.html',
+                controller: 'AdminGiftsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkAdmin
+                }
+            })
+            .when('/admin-groups', {
+                templateUrl: 'views/admin/groups/admin.groups.view.html',
+                controller: 'AdminGroupsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkAdmin
+                }
+            })
+            .when('/admin-invites', {
+                templateUrl: 'views/admin/invites/admin.invites.view.html',
+                controller: 'AdminInvitesController',
                 controllerAs: 'model',
                 resolve: {
                     loggedin: checkAdmin
@@ -76,7 +108,7 @@
         return deferred.promise;
     };
 
-    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, $routeParams)
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
     {
         var deferred = $q.defer();
 
@@ -87,10 +119,6 @@
             if (user !== '0')
             {
                 $rootScope.currentUser = user;
-                if ($rootScope.currentUser._id == $routeParams.userID ||
-                    $rootScope.currentUser.roles.indexOf('admin') > -1) {
-                    $rootScope.editProfile = True;
-                }
                 deferred.resolve();
             }
             // User is Not Authenticated
