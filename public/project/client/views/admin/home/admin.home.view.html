@@ -1,9 +1,29 @@
-<h2>Oh look! You're an admin.</h2>
 
-<p>Listen, {{currentUser.firstName}}. I know it may not seem like much, but this site took a while to build.
-    Don't let your admin power go to your head. You can do some cool stuff, like adding, updating, and deleting any user in the system.
-    Please don't delete all the admins.</p>
-
-<p>Use the links above to get to a table to search through assignments, gifts, groups, invites, or users.
-    You'll also find buttons that allow you to perform any CRUD operations you'd like on those pages.
-    For groups and users you can click "View" to see their details as the group leader or named user, respectively. Enjoy!</p>
+<div class="container">
+    <hr class="divider">
+    <div class="row featurette">
+        <div class="col-md-5">
+            <h2 class="featurette-heading">Oh look, {{currentUser.firstName}}!<span class="text-muted">&nbsp; You're an admin.</span></h2>
+            <p class="lead">Listen, {{currentUser.firstName}}. I know it may not seem like much, but this site took a while to build.
+                Don't let your admin power go to your head. You can do some cool stuff, like adding, updating, and deleting any user in the system.
+                Please don't delete all the admins.</p>
+        </div>
+        <div class="col-md-7">
+            <img class="featurette-image img-responsive center-block" src="./views/admin/home/admin.png"
+                 width="450px" height="450px" alt="Profile Picture">
+        </div>
+    </div>
+    <hr class="divider">
+    <div class="row featurette">
+        <div class="col-md-6">
+            <p class="lead">Use the links above to get to a table to search through assignments, gifts, groups, invites, or users.
+                You'll also find buttons that allow you to perform any CRUD operations you'd like on those pages.</p>
+        </div>
+        <div class="col-md-6">
+            <p class="lead">While all the admin pages will function on a mobile device, it's probably easier to view these pages from a larger screen. Because of all the
+                information being made available in the tables the rows are simply too wide for a small screen. At the very least hold your mobile device in landscape
+                mode, it will make your life easier.</p>
+        </div>
+    </div>
+    <hr class="divider">
+</div>
