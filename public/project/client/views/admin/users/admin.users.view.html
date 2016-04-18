@@ -34,7 +34,8 @@
         </thead>
         <tbody>
         <tr ng-repeat="user in users">
-            <td>{{user._id}}</td>
+            <td><a href="#/user-details/{{user._id}}">
+                {{user._id}}</a></td>
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.roles}}</td>

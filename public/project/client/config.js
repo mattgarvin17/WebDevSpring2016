@@ -3,7 +3,7 @@
         .module("PollyannaApp")
         .config(configuration);
 
-    function configuration($routeProvider, $httpProvider) {
+    function configuration($routeProvider) {
         $routeProvider
             .when('/home', {
                 templateUrl: 'views/home/home.view.html',
@@ -48,6 +48,30 @@
             .when('/invites', {
                 templateUrl: 'views/invites/invites.view.html',
                 controller: 'InvitesController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/create-group', {
+                templateUrl: 'views/create-group/createGroup.view.html',
+                controller: 'CreateGroupController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/group-details/:groupID', {
+                templateUrl: 'views/group-details/groupDetails.view.html',
+                controller: 'GroupDetailsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/user-details/userID', {
+                templateUrl: 'views/user-details/userDetails.view.html',
+                controller: 'UserDetailsController',
                 controllerAs: 'model',
                 resolve: {
                     loggedin: checkLoggedin

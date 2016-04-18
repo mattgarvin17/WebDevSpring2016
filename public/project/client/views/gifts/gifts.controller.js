@@ -4,9 +4,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("GiftsController", GiftsController);
+        .controller("GiftsController", giftsController);
 
-    function GiftsController(GiftService, $rootScope)
+    function giftsController(GiftService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;

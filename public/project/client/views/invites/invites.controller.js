@@ -4,9 +4,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("InvitesController", InvitesController);
+        .controller("InvitesController", invitesController);
 
-    function InvitesController(InviteService, GroupService, UserService, $rootScope)
+    function invitesController(InviteService, GroupService, UserService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;

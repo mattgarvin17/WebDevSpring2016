@@ -1,0 +1,33 @@
+<div class="container">
+    <hr class="divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <img class="featurette-image img-responsive center-block" src="./views/profile/christmas_tree.png"
+                 width="450px" height="450px" alt="Profile Picture">
+        </div>
+        <div class="col-md-5">
+            <h2 class="featurette-heading">{{user.firstName}} {{user.lastName}}<span class="text-muted">&nbsp; {{user.email}}</span></h2>
+            <p class="lead">Have you been assigned to {{user.firstName}} for a Pollyanna group? Check out their gift suggestions below!</p>
+        </div>
+    </div>
+    <hr class="divider">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="gift in gifts">
+            <td>{{gift.itemName}}</td>
+            <td>{{gift.price}}</td>
+            <td>{{gift.itemDescription}}</td>
+            <td>{{gift.itemLink}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

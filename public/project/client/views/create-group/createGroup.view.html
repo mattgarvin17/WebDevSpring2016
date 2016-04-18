@@ -1,0 +1,24 @@
+<h2>Create Group</h2>
+
+<div ng-show="errorMessage" class="alert alert-danger">
+    <strong>Error:</strong> {{errorMessage}}
+</div>
+<p>You'll be the leader of any group you create. Once you've created a group you'll see it under "Groups". You can click on any group in that list
+   to visit its details page. From there you can view and edit any of the information you've entered below, invite new members to the group,
+    or delete the group (as long as you're the leader, otherwise you can only view the info.).</p>
+<h4>Group Name:</h4>
+<input ng-model="model.group.groupName"
+       type="text"
+       class="form-control"
+       placeholder="Group Name"/>
+<h4>Event Date:</h4>
+<input ng-model="model.group.eventDate"
+       type="date"
+       class="form-control"/>
+<h4>Price Range:</h4>
+<input ng-model="model.group.priceRange"
+       type="text"
+       placeholder="$20-$30"
+       class="form-control"/>
+
+<button ng-click="model.createGroup(model.group);" class="btn btn-primary btn-block">Create Group</button>

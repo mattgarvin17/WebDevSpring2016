@@ -3,9 +3,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("AssignmentsController", AssignmentsController);
+        .controller("AssignmentsController", assignmentsController);
 
-    function AssignmentsController(AssignmentService, $rootScope)
+    function assignmentsController(AssignmentService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;

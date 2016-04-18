@@ -4,7 +4,7 @@ module.exports = function(mongoose) {
     var GroupSchema = mongoose.Schema({
         groupName: String,
         // userID of leader
-        groupLeader: String,
+        groupLeaderID: String,
         groupLeaderName: String,
         // list of userID's
         members: [String],

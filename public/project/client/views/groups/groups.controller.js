@@ -4,9 +4,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("GroupsController", GroupsController);
+        .controller("GroupsController", groupsController);
 
-    function GroupsController(GroupService, $rootScope)
+    function groupsController(GroupService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
