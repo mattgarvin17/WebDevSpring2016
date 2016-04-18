@@ -8,7 +8,7 @@
         vm.register = register;
         var newUser = {};
         function init() {
-
+            $rootScope.errorMessage = null;
         }
         init();
 

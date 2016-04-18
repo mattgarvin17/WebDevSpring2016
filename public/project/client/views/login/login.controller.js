@@ -9,6 +9,7 @@
         vm.login = login;
 
         function init() {
+            $rootScope.errorMessage = null;
         }
         init();
 
