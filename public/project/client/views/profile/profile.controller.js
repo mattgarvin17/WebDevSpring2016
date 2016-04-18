@@ -3,38 +3,37 @@
         .module("PollyannaApp")
         .controller("ProfileController", profileController);
 
-    function profileController($rootScope) {
+    function profileController($rootScope, UserService, $location) {
         var vm = this;
-        var newUser = {};
+        var newUser = {}
         vm.updateUser = updateUser;
-        vm.edit = edit;
-        vm.editProfile = false;
         vm.currentUser = $rootScope.currentUser;
-      
-        function edit() {
-            vm.editProfile = true;
+        vm.user = angular.copy($rootScope.currentUser);
+        vm.user.password2 = vm.user.password;
+
+        function init() {
+
         }
+        init();
         
         function updateUser(user) {
+            console.log(user);
             if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) && user.email) {
                 if (user.password == user.password2 || !user.password || !user.password2) {
                     if (user.firstName && user.lastName) {
                         newUser.roles = ['standard'];
-                        newUser.groups = [];
-                        newUser.gifts = [];
-                        newUser.assignments = [];
                         newUser.email = user.email;
                         newUser.password = user.password;
                         newUser.firstName = user.firstName;
                         newUser.lastName = user.lastName;
                         UserService
-                            .updateUser(newUser)
+                            .updateUser(vm.currentUser._id, newUser)
                             .then(
                                 function (response) {
                                     var user = response.data;
                                     if (user != null) {
                                         $rootScope.currentUser = user;
-                                        $location.url("/profile/{{currentUser._id");
+                                        $location.url("/profile");
                                     }
                                 },
                                 function (err) {

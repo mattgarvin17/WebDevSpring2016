@@ -10,10 +10,38 @@
             <h2 class="featurette-heading">{{currentUser.firstName}} {{currentUser.lastName}}<span class="text-muted">&nbsp; {{currentUser.email}}</span></h2>
             <p class="lead">This is your profile, {{currentUser.firstName}}. This is what people in Pollyanna groups with you can see.
                 If you're looking for your groups, invites, or assignments, check out the corresponding links above!
-                If you'd like to change anything, including your password, just click the 'Edit' button below.
-                When you're done, click the 'Save' button to save your changes.</p>
+                Change anything you'd like below and click save to update your profile.</p>
         </div>
     </div>
     <hr class="divider">
+
+    <div ng-show="errorMessage" class="alert alert-danger">
+        <strong>Error:</strong> {{errorMessage}}
+    </div>
+
+    <input ng-model="model.user.email"
+           type="email"
+           class="form-control"
+           placeholder="Email Address"/>
+    <input ng-model="model.user.password"
+           type="password"
+           placeholder="Password"
+           class="form-control"/>
+    <input ng-model="model.user.password2"
+           type="password"
+           placeholder="Verify Password"
+           class="form-control"/>
+    <input ng-model="model.user.firstName"
+           type="text"
+           placeholder="First Name"
+           class="form-control"/>
+    <input ng-model="model.user.lastName"
+           type="text"
+           placeholder="Last Name"
+           class="form-control"/>
+
+    <button ng-click="model.updateUser(model.user);" class="btn btn-success btn-block">Save</button>
+
+
 </div>
 
