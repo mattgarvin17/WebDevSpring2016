@@ -13,7 +13,10 @@
         init();
 
         function register(user) {
-            if (user.email) {
+            if (!user.email) {
+                $rootScope.errorMessage = "Email address is invalid.";
+            }
+            else{
                 if (user.password == user.password2 || !user.password || !user.password2) {
                     if (user.firstName && user.lastName) {
                         newUser.roles = ['standard'];
@@ -47,9 +50,6 @@
                 else {
                     $rootScope.errorMessage = "Passwords do not match.";
                 }
-            }
-            else {
-                $rootScope.errorMessage = "Email address is invalid.";
             }
 
         }
