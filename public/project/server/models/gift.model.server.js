@@ -1,8 +1,6 @@
-// load q promise library
-var q = require("q");
+var mongoose      = require("mongoose");
 
-// pass db and mongoose reference to model
-module.exports = function(db, mongoose) {
+module.exports = function() {
 
     // load gift schema
     var GiftSchema = require("./gift.schema.server.js")(mongoose);
@@ -12,62 +10,36 @@ module.exports = function(db, mongoose) {
 
     var api = {
         createGift: createGift,
+        updateGift: updateGift,
+        deleteGift: deleteGift,
+        findAllGifts: findAllGifts,
         findGiftById: findGiftById,
-        findAllGiftsByUserId: findAllGiftsByUserId,
+        findAllGiftsByUserId: findAllGiftsByUserId
     };
     return api;
 
-
-    function findAllGiftsByUserId (userId) {
-        var deferred = q.defer();
-
-        // find all gifts for given user ID
-        GiftModel.find({
-            user: {$in: userId}
-        }, function (err, gifts) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(gifts);
-            }
-        });
-
-        return deferred.promise;
-    }
-
-    // use gift model find by id
-    function findGiftById(giftId) {
-        var deferred = q.defer();
-        GiftModel.findById(giftId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
-        return deferred.promise;
-    }
-
     function createGift(gift) {
+        return GiftModel.create(gift);
+    }
 
-        // use q to defer the response
-        var deferred = q.defer();
+    function updateGift(giftID, gift) {
+        return GiftModel.update({_id: giftID}, {$set: gift});
+    }
 
-        // insert new gift with mongoose gift model's create()
-        GiftModel.create(gift, function (err, doc) {
+    function deleteGift(giftID) {
+        return GiftModel.remove({_id: giftID});
+    }
 
-            if (err) {
-                // reject promise if error
-                deferred.reject(err);
-            } else {
-                // resolve promise
-                deferred.resolve(doc);
-            }
+    function findAllGifts() {
+        return GiftModel.find();
+    }
 
-        });
+    function findGiftById(giftID) {
+        return GiftModel.findById(giftID);
+    }
 
-        // return a promise
-        return deferred.promise;
+    function findAllGiftsByUserId(userID) {
+        return GiftModel.find({userID: userID});
     }
 
 }

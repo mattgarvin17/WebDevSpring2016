@@ -3,7 +3,7 @@ module.exports = function(mongoose) {
     // use mongoose to declare a group schema
     var GiftSchema = mongoose.Schema({
         // userID of owner
-        user: String,
+        userID: String,
         price: String,
         itemName: String,
         itemDescription: String,

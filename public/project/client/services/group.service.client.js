@@ -5,23 +5,38 @@
 
     function groupService($http, $rootScope) {
         var api = {
-            newGroup: newGroup,
-            getGroup: getGroup,
-            getAllGroupsByUserId: getAllGroupsByUserId
+            createGroup: createGroup,
+            updateGroup: updateGroup,
+            deleteGroup: deleteGroup,
+            findAllGroups: findAllGroups,
+            findGroupById: findGroupById,
+            findGroupsByLeaderId: findGroupsByLeaderId,
 
         };
         return api;
 
-        function newGroup(group) {
-            return $http.post("/api/pollyanna/newGroup", group);
+        function createGroup(group) {
+            return $http.post("api/pollyanna/group", group);
         }
 
-        function getGroup(groupId) {
-            return $http.get("/api/pollyanna/group/"+groupId)
+        function updateGroup(groupID, group) {
+            return $http.put("/api/pollyanna/group/"+groupID, group);
         }
 
-        function getAllGroupsByUserId() {
-            return $http.get("/api/pollyanna/user/"+$rootScope.currentUser._id+"/groups")
+        function deleteGroup(groupID) {
+            return $http.delete("/api/pollyanna/group/"+groupID);
+        }
+
+        function findAllGroups() {
+            return $http.get("/api/pollyanna/group");
+        }
+
+        function findGroupById(groupID) {
+            return $http.get("/api/pollyanna/group/"+groupID);
+        }
+
+        function findGroupsByLeaderId(leaderID) {
+            return $http.get("/api/pollyanna/group/leader/"+leaderID);
         }
 
     }

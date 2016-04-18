@@ -1,8 +1,6 @@
-// load q promise library
-var q = require("q");
+var mongoose      = require("mongoose");
 
-// pass db and mongoose reference to model
-module.exports = function(db, mongoose) {
+module.exports = function() {
 
     // load group schema
     var GroupSchema = require("./group.schema.server.js")(mongoose);
@@ -12,62 +10,36 @@ module.exports = function(db, mongoose) {
 
     var api = {
         createGroup: createGroup,
+        updateGroup: updateGroup,
+        deleteGroup: deleteGroup,
+        findAllGroups: findAllGroups,
         findGroupById: findGroupById,
-        findAllGroupsByUserId: findAllGroupsByUserId,
+        findAllGroupsByLeaderId: findAllGroupsByLeaderId
     };
     return api;
 
-
-    function findAllGroupsByUserId (userId) {
-        var deferred = q.defer();
-
-        // find all groups for given user ID
-        GroupModel.find({
-            members: {$in: userId}
-        }, function (err, groups) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(groups);
-            }
-        });
-
-        return deferred.promise;
-    }
-
-    // use group model find by id
-    function findGroupById(groupId) {
-        var deferred = q.defer();
-        GroupModel.findById(groupId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
-        return deferred.promise;
-    }
-
     function createGroup(group) {
+        return GroupModel.create(group);
+    }
 
-        // use q to defer the response
-        var deferred = q.defer();
+    function updateGroup(groupID, group) {
+        return GroupModel.update({_id: groupID}, {$set: group});
+    }
 
-        // insert new group with mongoose group model's create()
-        GroupModel.create(group, function (err, doc) {
+    function deleteGroup(groupID) {
+        return GroupModel.remove({_id: groupID});
+    }
 
-            if (err) {
-                // reject promise if error
-                deferred.reject(err);
-            } else {
-                // resolve promise
-                deferred.resolve(doc);
-            }
+    function findAllGroups() {
+        return GroupModel.find();
+    }
 
-        });
+    function findGroupById(groupID) {
+        return GroupModel.findById(groupID);
+    }
 
-        // return a promise
-        return deferred.promise;
+    function findAllGroupsByLeaderId(leaderID) {
+        return GroupModel.find({groupLeader: leaderID});
     }
 
 }

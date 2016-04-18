@@ -5,24 +5,38 @@
 
     function giftService($http, $rootScope) {
         var api = {
-            newGift: newGift,
-            getGift: getGift,
-            getAllGiftsByUserId: getAllGiftsByUserId
+            createGift: createGift,
+            updateGift: updateGift,
+            deleteGift: deleteGift,
+            findAllGifts: findAllGifts,
+            findGiftById: findGiftById,
+            findGiftsByUserId: findGiftsByUserId
 
         };
         return api;
 
-        function newGift(gift) {
-            return $http.post("/api/pollyanna/newGift", gift);
+        function createGift(gift) {
+            return $http.post("api/pollyanna/gift", gift);
         }
 
-        function getGift(giftId) {
-            return $http.get("/api/pollyanna/gift/"+giftId)
+        function updateGift(giftID, gift) {
+            return $http.put("/api/pollyanna/gift/"+giftID, gift);
         }
 
-        function getAllGiftsByUserId() {
-            return $http.get("/api/pollyanna/user/"+$rootScope.currentUser._id+"/gifts")
+        function deleteGift(giftID) {
+            return $http.delete("/api/pollyanna/gift/"+giftID);
         }
 
+        function findAllGifts() {
+            return $http.get("/api/pollyanna/gift");
+        }
+
+        function findGiftById(giftID) {
+            return $http.get("/api/pollyanna/gift/"+giftID);
+        }
+
+        function findGiftsByUserId(userID) {
+            return $http.get("/api/pollyanna/gift/user/"+userID);
+        }
     }
 })();

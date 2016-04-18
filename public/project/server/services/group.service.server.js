@@ -1,59 +1,121 @@
+var mongoose = require('mongoose');
+
 module.exports = function(app, groupModel) {
-    app.post("/api/pollyanna/newGroup", newGroup);
-    app.get("/api/pollyanna/user/:userId/groups", allGroups);
-    app.get("/api/pollyanna/group/:groupId", getGroup);
 
-    function newGroup(req, res) {
-        var group = req.body;
+    app.post("api/pollyanna/group", createGroup);
+    app.put("/api/pollyanna/group/:id", updateGroup);
+    app.delete("/api/pollyanna/group/:id", deleteGroup);
+    app.get("/api/pollyanna/group", findAllGroups);
+    app.get("/api/pollyanna/group/:id", findGroupById);
+    app.get("/api/pollyanna/group/leader/:id", findAllGroupsByLeaderId);
 
-        group = groupModel.createGroup(group)
-            // handle model promise
+
+
+    function createGroup(req, res) {
+        var newGroup = req.body;
+        if(newGroup.members && newGroup.members.length > 1) {
+            newGroup.members = newGroup.members.split(",");
+        } else {
+            newGroup.members = [];
+        }
+            groupModel.createGroup(newGroup)
+                .then(
+                    function (group) {
+                        return groupModel.findAllGroups();
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function (groups) {
+                        res.json(groups);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+    }
+            
+    
+
+    function updateGroup(req, res) {
+        var newGroup = req.body;
+
+        groupModel.updateGroup(req.params.id, newGroup)
             .then(
-                // return group if promise resolved
-                function (doc) {
-                    req.session.currentGroup = doc;
-                    res.json(group);
+                function(group){
+                    return groupModel.findAllGroups();
                 },
-                // send error if promise rejected
-                function (err) {
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(groups){
+                    res.json(groups);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+
+    }
+
+    function deleteGroup(req, res) {
+        groupModel
+            .removeGroup(req.params.id)
+            .then(
+                function(group){
+                    return groupModel.findAllGroups();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(groups){
+                    res.json(groups);
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             );
     }
 
-    function allGroups(req, res) {
-        var userId = req.params.userId;
-        var groups = null;
-
-        groupModel.findAllGroupsByUserId(userId)
+    function findAllGroups(req, res) {
+        groupModel.findAllGroups()
             .then(
-                function (doc) {
-                    groups = doc;
+                function(groups){
+                    res.json(groups);
                 },
-
-                // reject promise if error
-                function (err) {
+                function(err){
                     res.status(400).send(err);
                 }
-            )
+            );
     }
 
-    function getGroup(req, res) {
-        var groupId = req.params.groupId;
-        var group = null;
-
-        groupModel.findGroupById(groupId)
+    function findGroupById(req, res) {
+        groupModel.findGroupById(req.params.id)
             .then(
-                function (doc) {
-                    req.session.currentGroup = doc;
+                function(group){
                     res.json(group);
                 },
-
-                // reject promise if error
-                function (err) {
+                function(err){
                     res.status(400).send(err);
                 }
             )
     }
 
+    function findAllGroupsByLeaderId(req, res) {
+        groupModel.findAllGroupsByLeaderId(req.params.id)
+            .then(
+                function(groups){
+                    res.json(groups);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+    }
 }

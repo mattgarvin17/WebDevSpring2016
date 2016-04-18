@@ -37,15 +37,15 @@ module.exports = function() {
     }
 
     function findInviteById(inviteID) {
-        return InviteModel.findById(inviteID)
+        return InviteModel.findById(inviteID);
     }
 
     function findAllInvitesByGroupId(groupID) {
-        return InviteModel.find({groupID: groupID})
+        return InviteModel.find({groupID: groupID});
     }
 
     function findAllInvitesByReceiverId(receiverID) {
-        return InviteModel.find({receiverID: receiverID})
+        return InviteModel.find({receiverID: receiverID});
     }
     
     function findInviteByGroupAndReceiver(groupID, receiverID) {

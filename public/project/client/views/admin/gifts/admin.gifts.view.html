@@ -1,10 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h1>Gifts</h1>
+<p>These are all the gift suggestions various users have come up with. While this page will allow any CRUD operations, you may find it easier to
+    view gifts from a user's details page, the way standard users do.
+</p>
 
-</body>
-</html>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Gift ID</th>
+        <th>User ID</th>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Link</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <th>&nbsp;</th>
+        <th><input ng-model="gift.userID" class="form-control"/></th>
+        <th><input ng-model="gift.itemName" class="form-control"/></th>
+        <th><input ng-model="gift.price" class="form-control"/></th>
+        <th><input ng-model="gift.itemDescription" class="form-control"/></th>
+        <th><input ng-model="gift.itemLink" class="form-control"/></th>
+        <th>
+            <button ng-click="createGift(gift)" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        </th>
+        <th>
+            <button ng-click="updateGift(gift)" class="btn btn-success">
+                &check;</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="gift in gifts">
+        <td>{{gift._id}}</td>
+        <td>{{gift.userID}}</td>
+        <td>{{gift.itemName}}</td>
+        <td>{{gift.price}}</td>
+        <td>{{gift.itemDescription}}</td>
+        <td>{{gift.itemLink}}</td>
+        <td>
+            <button ng-click="removeGift(gift)" class="btn btn-danger">X</button>
+        </td>
+        <td>
+            <button ng-click="selectGift(gift)" class="btn btn-info">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

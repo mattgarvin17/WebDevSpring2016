@@ -126,8 +126,8 @@ module.exports = function(app, inviteModel) {
             )
     }
 
-    function findAllInvitesByGiverId(req, res) {
-        inviteModel.findAllInvitesByGiverId(req.params.receiverID)
+    function findAllInvitesByReceiverId(req, res) {
+        inviteModel.findAllInvitesByReceiverId(req.params.receiverID)
             .then(
                 function(invites){
                     res.json(invites);
@@ -137,6 +137,4 @@ module.exports = function(app, inviteModel) {
                 }
             )
     }
-
-    
 }

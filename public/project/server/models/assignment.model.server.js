@@ -37,15 +37,15 @@ module.exports = function() {
     }
 
     function findAssignmentById(assignmentID) {
-        return AssignmentModel.findById(assignmentID)
+        return AssignmentModel.findById(assignmentID);
     }
 
     function findAllAssignmentsByGroupId(groupID) {
-        return AssignmentModel.find({groupID: groupID})
+        return AssignmentModel.find({groupID: groupID});
     }
 
     function findAllAssignmentsByGiverId(giverID) {
-        return AssignmentModel.find({giverID: giverID})
+        return AssignmentModel.find({giverID: giverID});
     }
 
     function findAssignmentByGroupAndReceiver(groupID, receiverID) {
