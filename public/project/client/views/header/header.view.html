@@ -72,19 +72,19 @@
                 </li>
                 <li ng-class="{'active': model.$location.url().indexOf('/assignments')>=0}"
                     ng-if="currentUser">
-                    <a class="visible-xs" href="#/assignments">Assignments</a>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/assignments">Assignments</a>
                 </li>
                 <li ng-class="{'active': model.$location.url().indexOf('/gifts')>=0}"
                     ng-if="currentUser">
-                    <a class="visible-xs" href="#/gifts">Gifts</a>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/gifts">Gifts</a>
                 </li>
                 <li ng-class="{'active': model.$location.url().indexOf('/groups')>=0}"
                     ng-if="currentUser">
-                    <a class="visible-xs" href="#/groups">Groups</a>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/groups">Groups</a>
                 </li>
                 <li ng-class="{'active': model.$location.url().indexOf('/invites')>=0}"
                     ng-if="currentUser">
-                    <a class="visible-xs" href="#/invites">Invites</a>
+                    <a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/invites">Invites</a>
                 </li>
                 <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
                     ng-if="currentUser">
