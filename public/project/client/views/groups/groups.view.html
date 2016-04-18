@@ -1,0 +1,23 @@
+<h2>Your Groups</h2>
+<p>These are all the groups you're a part of. To see more details for any group, just click on its name. If you'd like to leave a group you can
+do that from the details page as well. Want to create a new group? Click the "Create Group" button below.</p>
+
+<p><a class="btn btn-lg btn-primary" href="#/create-group" role="button">Create Group <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></p>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Group Name</th>
+        <th>Group Leader</th>
+        <th>Event Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="group in groups">
+        <td>{{group.groupName}}</td>
+        <td>{{group.groupLeaderName}}</td>
+        <td>{{group.eventDate}}</td>
+    </tr>
+    </tbody>
+
+</table>

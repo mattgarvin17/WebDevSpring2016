@@ -1,0 +1,46 @@
+<h2>Your Gift Suggestions</h2>
+<p>Here you can post ideas for gifts you'd like to receive. Whoever gets assigned to you will be able to see these so they know what kind of
+stuff you're into. Make sure to include suggestions within the price ranges of your groups!</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Link</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <th><input ng-model="gift.itemName" class="form-control"/></th>
+        <th><input ng-model="gift.price" class="form-control"/></th>
+        <th><input ng-model="gift.itemDescription" class="form-control"/></th>
+        <th><input ng-model="gift.itemLink" class="form-control"/></th>
+        <th>
+            <button ng-click="createGift(gift)" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        </th>
+        <th>
+            <button ng-click="updateGift(gift)" class="btn btn-success">
+                &check;</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="gift in gifts">
+        <td>{{gift.itemName}}</td>
+        <td>{{gift.price}}</td>
+        <td>{{gift.itemDescription}}</td>
+        <td>{{gift.itemLink}}</td>
+        <td>
+            <button ng-click="removeGift(gift)" class="btn btn-danger">X</button>
+        </td>
+        <td>
+            <button ng-click="selectGift(gift)" class="btn btn-info">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+<h2>Your Assignments</h2>
+<p>Here are all your assignments, {{currentUser.firstName}}. If you don't see one for every group you're in, don't worry. It's up to the group leader
+to decide when the assignments are generated. Maybe they're just waiting for more of your friends to join!</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Group Name</th>
+            <th>Your Assignment</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="assignment in assignments">
+            <td>{{assignment.groupName}}</td>
+            <td>{{assignment.receiverName}}</td>
+        </tr>
+    </tbody>
+
+</table>

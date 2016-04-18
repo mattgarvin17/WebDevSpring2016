@@ -13,9 +13,41 @@
                     loggedin: checkCurrentUser
                 }
             })
-            .when('/profile/', {
+            .when('/profile', {
                 templateUrl: 'views/profile/profile.view.html',
                 controller: 'ProfileController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/assignments', {
+                templateUrl: 'views/assignments/assignments.view.html',
+                controller: 'AssignmentsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/gifts', {
+                templateUrl: 'views/gifts/gifts.view.html',
+                controller: 'GiftsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/groups', {
+                templateUrl: 'views/groups/groups.view.html',
+                controller: 'GroupsController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/invites', {
+                templateUrl: 'views/invites/invites.view.html',
+                controller: 'InvitesController',
                 controllerAs: 'model',
                 resolve: {
                     loggedin: checkLoggedin

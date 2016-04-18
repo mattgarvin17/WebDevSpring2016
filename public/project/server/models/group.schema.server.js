@@ -5,6 +5,7 @@ module.exports = function(mongoose) {
         groupName: String,
         // userID of leader
         groupLeader: String,
+        groupLeaderName: String,
         // list of userID's
         members: [String],
         eventDate: String,

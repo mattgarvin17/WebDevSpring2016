@@ -8,7 +8,8 @@
     <tr>
         <th>Group ID</th>
         <th>Name</th>
-        <th>Leader</th>
+        <th>Leader ID</th>
+        <th>Leader Name</th>
         <th>Members</th>
         <th>Event Date</th>
         <th>Price Range</th>
@@ -19,6 +20,7 @@
         <th>&nbsp;</th>
         <th><input ng-model="group.groupName" class="form-control"/></th>
         <th><input ng-model="group.groupLeader" class="form-control"/></th>
+        <th><input ng-model="group.groupLeaderName" class="form-control"/></th>
         <th><input ng-model="group.members" class="form-control"/></th>
         <th><input ng-model="group.eventDate" class="form-control"/></th>
         <th><input ng-model="group.priceRange" class="form-control"/></th>
@@ -36,7 +38,8 @@
     <tr ng-repeat="group in groups">
         <td>{{group._id}}</td>
         <td>{{group.groupName}}</td>
-        <td>{{group.groupleader}}</td>
+        <td>{{group.groupLeader}}</td>
+        <td>{{group.groupLeaderName}}</td>
         <td>{{group.members}}</td>
         <td>{{group.eventDate}}</td>
         <td>{{group.priceRange}}</td>

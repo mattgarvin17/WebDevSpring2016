@@ -11,6 +11,7 @@
             findAllGroups: findAllGroups,
             findGroupById: findGroupById,
             findGroupsByLeaderId: findGroupsByLeaderId,
+            findGroupsByIds: findGroupsByIds
 
         };
         return api;
@@ -34,6 +35,11 @@
         function findGroupById(groupID) {
             return $http.get("/api/pollyanna/group/"+groupID);
         }
+
+        function findGroupsByIds(groupIDs) {
+            return $http.get("/api/pollyanna/group/array", groupIDs);
+        }
+
 
         function findGroupsByLeaderId(leaderID) {
             return $http.get("/api/pollyanna/group/leader/"+leaderID);

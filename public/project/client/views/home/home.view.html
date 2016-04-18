@@ -19,7 +19,7 @@
                     <h1>Pollyanna Home</h1>
                     <p ng-if="currentUser">Welcome back, {{currentUser.firstName}}!</p>
                     <p ng-if="currentUser">Don't forget to check for new group invites!</p>
-                    <p ng-if="currentUser"><a class="btn btn-lg btn-primary" href="#" role="button">My Invites</a></p>
+                    <p ng-if="currentUser"><a class="btn btn-lg btn-primary" href="#/invites" role="button">My Invites</a></p>
                     <p ng-if="!currentUser">Wecome to Pollyanna! Not sure what you're doing? Scroll down for some information, or look through these pretty slides!</p>
                     <p ng-if="!currentUser"><a class="btn btn-lg btn-primary" href="#/register" role="button">Register</a>
                         <a class="btn btn-lg btn-primary" href="#/login" role="button">Login</a></p>
@@ -32,7 +32,7 @@
                 <div class="carousel-caption">
                     <h1>Pollyanna Groups</h1>
                     <p ng-if="currentUser">Hey, {{currentUser.firstName}}, have you checked in on your groups lately? Your assignments might have new gift suggestions!</p>
-                    <p ng-if="currentUser"><a class="btn btn-lg btn-primary" href="#" role="button">My Groups</a></p>
+                    <p ng-if="currentUser"><a class="btn btn-lg btn-primary" href="#/groups" role="button">My Groups</a></p>
                     <p ng-if="!currentUser">Pollyanna groups are a lot of fun around the holidays. Sign up and invite your friends and family to join you!</p>
                     <p ng-if="!currentUser"><a class="btn btn-lg btn-primary" href="#/register" role="button">Register</a>
                         <a class="btn btn-lg btn-primary" href="#/login" role="button">Login</a></p>                </div>
@@ -44,7 +44,7 @@
                 <div class="carousel-caption">
                     <h1>Pollyanna Gifts</h1>
                     <p ng-if="currentUser">Have you added all the gifts you want most to your suggestions? Get on it, {{currentUser.firstName}}!</p>
-                    <p ng-if="currentUser"><a class="btn btn-lg btn-primary" href="#" role="button">My Gifts</a></p>
+                    <p ng-if="currentUser"><a class="btn btn-lg btn-primary" href="#/gifts" role="button">My Gifts</a></p>
                     <p ng-if="!currentUser">Who doesn't like exchanging gifts? Make this holiday a little more exciting with a Pollyanna!</p>
                     <p ng-if="!currentUser"><a class="btn btn-lg btn-primary" href="#/register" role="button">Register</a>
                         <a class="btn btn-lg btn-primary" href="#/login" role="button">Login</a></p>                </div>
@@ -74,7 +74,7 @@
             <img class="img-circle" src="./views/home/Wikipedia.png" alt="Wikipedia Logo" width="140" height="140">
             <h2>What is a Pollyanna?</h2>
             <p>It's just another word for a Secret Santa. Really, some people call it a Pollyanna. Don't believe me? Check the Wikipedia link below.</p>
-            <p><a class="btn btn-default" href="https://en.wikipedia.org/wiki/Secret_Santa#cite_note-3" role="button">Wikipedia &raquo;</a></p>
+            <p><a class="btn btn-default" href="https://en.wikipedia.org/wiki/Secret_Santa" role="button">Wikipedia &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="./views/home/neu-seal.jpg" alt="Northeastern Logo" width="140" height="140">
