@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function(app, inviteModel) {
 
-    app.post("api/pollyanna/invite", createInvite);
+    app.post("/api/pollyanna/invite", createInvite);
     app.put("/api/pollyanna/invite/:id", updateInvite);
     app.delete("/api/pollyanna/invite/:id", deleteInvite);
     app.get("/api/pollyanna/invite", findAllInvites);

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function(app, assignmentModel) {
     
-    app.post("api/pollyanna/assignment", createAssignment); 
+    app.post("/api/pollyanna/assignment", createAssignment); 
     app.put("/api/pollyanna/assignment/:id", updateAssignment);
     app.delete("/api/pollyanna/assignment/:id", deleteAssignment);
     app.get("/api/pollyanna/assignment", findAllAssignments);

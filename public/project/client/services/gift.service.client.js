@@ -16,7 +16,7 @@
         return api;
 
         function createGift(gift) {
-            return $http.post("api/pollyanna/gift", gift);
+            return $http.post("/api/pollyanna/gift", gift);
         }
 
         function updateGift(giftID, gift) {

@@ -17,7 +17,7 @@
         return api;
 
         function createInvite(invite) {
-            return $http.post("api/pollyanna/invite", invite);
+            return $http.post("/api/pollyanna/invite", invite);
         }
 
         function updateInvite(inviteID, invite) {

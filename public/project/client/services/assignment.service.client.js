@@ -18,7 +18,7 @@
         return api;
 
         function createAssignment(assignment) {
-            return $http.post("api/pollyanna/assignment", assignment);
+            return $http.post("/api/pollyanna/assignment", assignment);
         }
         
         function updateAssignment(assignmentID, assignment) {

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function(app, groupModel) {
 
-    app.post("api/pollyanna/group", createGroup);
+    app.post("/api/pollyanna/group", createGroup);
     app.put("/api/pollyanna/group/:id", updateGroup);
     app.delete("/api/pollyanna/group/:id", deleteGroup);
     app.get("/api/pollyanna/group", findAllGroups);

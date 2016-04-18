@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function(app, giftModel) {
 
-    app.post("api/pollyanna/gift", createGift);
+    app.post("/api/pollyanna/gift", createGift);
     app.put("/api/pollyanna/gift/:id", updateGift);
     app.delete("/api/pollyanna/gift/:id", deleteGift);
     app.get("/api/pollyanna/gift", findAllGifts);

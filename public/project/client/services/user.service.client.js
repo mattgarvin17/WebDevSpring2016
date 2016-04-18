@@ -54,9 +54,9 @@
         }
 
         function createUser(user) {
-            return $http.post("api/pollyanna/user", user);
+            return $http.post("/api/pollyanna/user", user);
         }
-
+        
         function updateUser(userID, user) {
             return $http.put("/api/pollyanna/user/"+userID, user);
         }

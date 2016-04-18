@@ -17,7 +17,7 @@
         return api;
 
         function createGroup(group) {
-            return $http.post("api/pollyanna/group", group);
+            return $http.post("/api/pollyanna/group", group);
         }
 
         function updateGroup(groupID, group) {
