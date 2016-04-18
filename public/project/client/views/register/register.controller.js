@@ -13,7 +13,7 @@
         init();
 
         function register(user) {
-            if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) && user.email) {
+            if (user.email) {
                 if (user.password == user.password2 || !user.password || !user.password2) {
                     if (user.firstName && user.lastName) {
                         newUser.roles = ['standard'];
