@@ -46,12 +46,12 @@
                     ng-if="currentUser && currentUser.roles.indexOf('admin') != -1">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-left">
-                        <li><a class="visible-xs" href="#/admin-home">Home</a></li>
-                        <li><a class="visible-xs" href="#/admin-assignments">Assignments</a></li>
-                        <li><a class="visible-xs" href="#/admin-gifts">Gifts</a></li>
-                        <li><a class="visible-xs" href="#/admin-groups">Groups</a></li>
-                        <li><a class="visible-xs" href="#/admin-invites">Invites</a></li>
-                        <li><a class="visible-xs" href="#/admin-users">Users</a></li></li>
+                        <li><a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-home">Home</a></li>
+                        <li><a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-assignments">Assignments</a></li>
+                        <li><a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-gifts">Gifts</a></li>
+                        <li><a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-groups">Groups</a></li>
+                        <li><a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-invites">Invites</a></li>
+                        <li><a class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" href="#/admin-users">Users</a></li></li>
                     </ul>
                 </li>
                 <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}"
