@@ -34,7 +34,7 @@
         {
             GiftService
                 .updateGift(gift._id, gift)
-                .then(handleSuccess, handleError);
+                .then(init, handleError);
             vm.gift = null;
 
         }
