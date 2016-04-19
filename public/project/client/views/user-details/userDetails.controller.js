@@ -24,6 +24,6 @@
                     console.log(vm.gifts);
                 });
         }
-        return init();
+        init();
     }
 })();

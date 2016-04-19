@@ -17,7 +17,7 @@ module.exports = function(app, inviteModel) {
         inviteModel.findInviteByGroupAndReceiver(newInvite.groupID, newInvite.receiverID)
             .then(
                 function(invite) {
-                    if (!invite) {
+                    if (invite) {
                         res.json(null);
                     }
                     else {

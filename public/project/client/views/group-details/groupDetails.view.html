@@ -1,10 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container">
+    <p ng-if="!leaderMode"><a class="btn btn-lg btn-danger" ng-click="model.leaveGroup()" role="button">Leave Group</a>
+        </p>
+    <p ng-if="leaderMode">
+        <a class="btn btn-lg btn-danger" ng-click="model.deleteGroup()" role="button">Delete Group</a>
+    </p>
+    <hr class="divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <img class="featurette-image img-responsive center-block" src="./views/group-details/groupIcon.png"
+                 width="450px" height="450px" alt="Group Picture">
+        </div>
+        <div class="col-md-5">
+            <h2 class="featurette-heading">{{group.groupName}}<span class="text-muted">&nbsp; Group Leader: {{group.groupLeaderName}}</span></h2>
+            <p class="lead">Welcome to the group! Below you'll find everyone else who's joined the group. Click anyone's name to check out their profile.</p>
+        </div>
+    </div>
+    <hr class="divider">
+    <div  ng-if="leaderMode">
+        <h4>Group Name:</h4>
+        <input ng-model="model.newGroup.groupName"
+               type="text"
+               class="form-control"
+               placeholder="Group Name"/>
+        <h4>Event Date:</h4>
+        <input ng-model="model.newGroup.eventDate"
+               type="date"
+               class="form-control"/>
+        <h4>Price Range:</h4>
+        <input ng-model="model.newGroup.priceRange"
+               type="text"
+               placeholder="$20-$30"
+               class="form-control"/>
 
-</body>
-</html>
+        <button ng-click="model.updateGroup(model.newGroup);" class="btn btn-success btn-block">Save</button>
+    </div>
+    <hr  ng-if="leaderMode" class="divider">
+    <div ng-show="errorMessage" class="alert alert-danger">
+        <strong>Error:</strong> {{errorMessage}}
+    </div>
+    <p  ng-if="leaderMode">
+        <input ng-model="model.invitedEmail"
+               type="email"
+               class="form-control"
+               placeholder="Email Address"/>
+        <a class="btn btn-lg btn-primary" ng-click="model.inviteUser()" role="button">Invite</a>
+    </p>
+    <hr  ng-if="leaderMode" class="divider">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td><a href="#/user-details/{{user._id}}">{{user.firstName}} {{user.lastName}}</a></td>
+            <td>{{user.email}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <hr class="divider">
+</div>
