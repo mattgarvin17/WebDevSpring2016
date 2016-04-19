@@ -18,37 +18,37 @@
     </tr>
     <tr>
         <th>&nbsp;</th>
-        <th><input ng-model="group.groupName" class="form-control"/></th>
-        <th><input ng-model="group.groupLeader" class="form-control"/></th>
-        <th><input ng-model="group.groupLeaderName" class="form-control"/></th>
-        <th><input ng-model="group.members" class="form-control"/></th>
-        <th><input ng-model="group.eventDate" class="form-control"/></th>
-        <th><input ng-model="group.priceRange" class="form-control"/></th>
+        <th><input ng-model="model.group.groupName" class="form-control"/></th>
+        <th><input ng-model="model.group.groupLeader" class="form-control"/></th>
+        <th><input ng-model="model.group.groupLeaderName" class="form-control"/></th>
+        <th><input ng-model="model.group.members" class="form-control"/></th>
+        <th><input ng-model="model.group.eventDate" class="form-control"/></th>
+        <th><input ng-model="model.group.priceRange" class="form-control"/></th>
         <th>
-            <button ng-click="createGroup(group)" class="btn btn-primary">
+            <button ng-click="createGroup(model.group)" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </th>
         <th>
-            <button ng-click="updateGroup(group)" class="btn btn-success">
+            <button ng-click="updateGroup(model.group)" class="btn btn-success">
                 &check;</button>
         </th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="group in groups">
+    <tr ng-repeat="group in model.groups">
         <td><a href="#/group-details/{{group._id}}">
             {{group._id}}</a></td>
         <td>{{group.groupName}}</td>
         <td>{{group.groupLeader}}</td>
         <td>{{group.groupLeaderName}}</td>
         <td>{{group.members}}</td>
-        <td>{{group.eventDate}}</td>
+        <td>{{group.eventDate}} </td>
         <td>{{group.priceRange}}</td>
         <td>
-            <button ng-click="removeGroup(group)" class="btn btn-danger">X</button>
+            <button ng-click="removeGroup(model.group)" class="btn btn-danger">X</button>
         </td>
         <td>
-            <button ng-click="selectGroup(group)" class="btn btn-info">
+            <button ng-click="selectGroup(model.group)" class="btn btn-info">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </td>

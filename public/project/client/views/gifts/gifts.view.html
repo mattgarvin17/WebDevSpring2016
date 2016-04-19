@@ -13,31 +13,31 @@ stuff you're into. Make sure to include suggestions within the price ranges of y
         <th>&nbsp;</th>
     </tr>
     <tr>
-        <th><input ng-model="gift.itemName" class="form-control"/></th>
-        <th><input ng-model="gift.price" class="form-control"/></th>
-        <th><input ng-model="gift.itemDescription" class="form-control"/></th>
-        <th><input ng-model="gift.itemLink" class="form-control"/></th>
+        <th><input ng-model="model.gift.itemName" class="form-control"/></th>
+        <th><input ng-model="model.gift.price" class="form-control"/></th>
+        <th><input ng-model="model.gift.itemDescription" class="form-control"/></th>
+        <th><input ng-model="model.gift.itemLink" class="form-control"/></th>
         <th>
-            <button ng-click="createGift(gift)" class="btn btn-primary">
+            <button ng-click="model.createGift(model.gift)" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </th>
         <th>
-            <button ng-click="updateGift(gift)" class="btn btn-success">
+            <button ng-click="model.updateGift(model.gift)" class="btn btn-success">
                 &check;</button>
         </th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="gift in gifts">
+    <tr ng-repeat="gift in model.gifts">
         <td>{{gift.itemName}}</td>
         <td>{{gift.price}}</td>
         <td>{{gift.itemDescription}}</td>
         <td>{{gift.itemLink}}</td>
         <td>
-            <button ng-click="removeGift(gift)" class="btn btn-danger">X</button>
+            <button ng-click="model.removeGift(gift)" class="btn btn-danger">X</button>
         </td>
         <td>
-            <button ng-click="selectGift(gift)" class="btn btn-info">
+            <button ng-click="model.selectGift(gift)" class="btn btn-info">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </td>

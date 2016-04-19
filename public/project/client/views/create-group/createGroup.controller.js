@@ -15,12 +15,14 @@
 
         function createGroup(group) {
             var today = new Date();
+            console.log(today);
+            console.log(group.eventDate);
             if (group.groupName) {
-                if (group.eventDate < today) {
+                if (group.eventDate > today) {
                     if (group.priceRange) {
                         newGroup.groupName = group.groupName;
                         newGroup.groupLeaderID = vm.currentUser._id;
-                        newGroup.groupLeaderName = vm.current.firstName + vm.currentUser.lastName;
+                        newGroup.groupLeaderName = vm.currentUser.firstName + " " + vm.currentUser.lastName;
                         newGroup.members = [vm.currentUser._id];
                         newGroup.eventDate = group.eventDate.toString();
                         newGroup.priceRange = group.priceRange;

@@ -35,6 +35,8 @@
             GiftService
                 .updateGift(gift._id, gift)
                 .then(handleSuccess, handleError);
+            vm.gift = null;
+
         }
 
         function createGift(gift)
@@ -43,6 +45,7 @@
             GiftService
                 .createGift(gift)
                 .then(init, handleError);
+            vm.gift = null;
         }
 
         function selectGift(gift)

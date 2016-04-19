@@ -23,7 +23,7 @@ module.exports = function() {
 
     function findUsersByIds(userIds) {
         return UserModel.find({
-            '_id': { $in: userIds}
+            '_id': { $in: userIds.ids.map(ObjectId)}
         });
     }
 

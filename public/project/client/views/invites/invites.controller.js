@@ -17,7 +17,7 @@
 
         function init() {
             InviteService
-                .findAllInvitesByReceiverId(vm.currentUser._id)
+                .findInvitesByReceiverId(vm.currentUser._id)
                 .then(handleSuccess, handleError);
         }
         init();

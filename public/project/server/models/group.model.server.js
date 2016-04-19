@@ -14,6 +14,7 @@ module.exports = function() {
         deleteGroup: deleteGroup,
         findAllGroups: findAllGroups,
         findGroupById: findGroupById,
+        findGroupsByIds: findGroupsByIds,
         findAllGroupsByLeaderId: findAllGroupsByLeaderId
     };
     return api;
@@ -23,11 +24,11 @@ module.exports = function() {
     }
 
     function updateGroup(groupID, group) {
-        return GroupModel.update({_id: groupID}, {$set: group});
+        return GroupModel.update({_id: ObjectId(groupID)}, {$set: group});
     }
 
     function deleteGroup(groupID) {
-        return GroupModel.remove({_id: groupID});
+        return GroupModel.remove({_id: ObjectId(groupID)});
     }
 
     function findAllGroups() {
@@ -35,7 +36,13 @@ module.exports = function() {
     }
 
     function findGroupById(groupID) {
-        return GroupModel.findById(groupID);
+        return GroupModel.findById(ObjectId(groupID));
+    }
+
+    function findGroupsByIds(groupIDs) {
+        return GroupModel.find({
+            '_id': { $in: groupIDs.ids.map(ObjectId)}
+        });
     }
 
     function findAllGroupsByLeaderId(leaderID) {

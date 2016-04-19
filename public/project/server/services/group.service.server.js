@@ -8,6 +8,7 @@ module.exports = function(app, groupModel) {
     app.get("/api/pollyanna/group", findAllGroups);
     app.get("/api/pollyanna/group/:id", findGroupById);
     app.get("/api/pollyanna/group/leader/:id", findAllGroupsByLeaderId);
+    app.get("/api/pollyanna/group/array", findGroupsByIds);
 
 
 
@@ -105,6 +106,20 @@ module.exports = function(app, groupModel) {
                     res.status(400).send(err);
                 }
             )
+    }
+
+    function findGroupsByIds(req, res) {
+        var IDs = req.body;
+        groupModel
+            .findGroupsByIds(IDs)
+            .then(
+                function(groups){
+                    res.json(groups);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllGroupsByLeaderId(req, res) {

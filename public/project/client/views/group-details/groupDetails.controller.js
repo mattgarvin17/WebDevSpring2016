@@ -24,16 +24,20 @@
                     vm.group = response.data;
                     vm.newGroup = angular.copy(vm.group);
                     console.log(vm.group);
+                    var members = {}
+                    members.ids = vm.group.members;
+                    UserService
+                        .findUsersByIds(members)
+                        .then(function (response) {
+                            vm.users = response.data;
+                            console.log(vm.users);
+                        });
+                    console.log(vm.currentUser._id);
+                    console.log(vm.group.groupLeaderID);
+                    if (vm.currentUser._id == vm.group.groupLeaderID) {
+                        vm.leaderMode = true;
+                    }
                 });
-            UserService
-                .findUsersByIds(vm.group.members)
-                .then(function (response) {
-                    vm.users = response.data;
-                    console.log(vm.users);
-                });
-            if (vm.currentUser._id == vm.group.groupLeaderID) {
-                vm.leaderMode = true;
-            }
         }
         init();
 
@@ -73,25 +77,28 @@
                     if (!vm.invitedUser) {
                         $rootScope.errorMessage = "No user found with that email address."
                     }
-                });
-            var newInvite = {};
-            newInvite.senderID = vm.currentUser._id;
-            newInvite.senderName = vm.currentUser.firstName + vm.currentUser.lastName;
-            newInvite.receiverID = vm.invitedUser._id;
-            newInvite.receiverName = vm.invitedUser.firstName + vm.invitedUser.lastName;
-            newInvite.groupID = vm.group._id;
-            newInvite.groupName = vm.group.groupName;
-            InviteService
-                .createInvite(newInvite)
-                .then(function(response) {
-                    success = response.data;
-                    if (!success) {
-                        $rootScope.errorMessage = "This user is already invited!"
-                    }
                     else {
-                        console.log(newInvite);
+                        var newInvite = {};
+                        newInvite.senderID = vm.currentUser._id;
+                        newInvite.senderName = vm.currentUser.firstName + vm.currentUser.lastName;
+                        newInvite.receiverID = vm.invitedUser._id;
+                        newInvite.receiverName = vm.invitedUser.firstName + vm.invitedUser.lastName;
+                        newInvite.groupID = vm.group._id;
+                        newInvite.groupName = vm.group.groupName;
+                        InviteService
+                            .createInvite(newInvite)
+                            .then(function(response) {
+                                success = response.data;
+                                if (!success) {
+                                    $rootScope.errorMessage = "This user is already invited!"
+                                }
+                                else {
+                                    console.log(newInvite);
+                                }
+                            });
                     }
                 });
+
         }
     }
 })();

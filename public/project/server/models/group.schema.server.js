@@ -8,7 +8,7 @@ module.exports = function(mongoose) {
         groupLeaderName: String,
         // list of userID's
         members: [String],
-        eventDate: String,
+        eventDate: Date,
         priceRange: String
 
     }, {collection: 'pollyanna.group'});

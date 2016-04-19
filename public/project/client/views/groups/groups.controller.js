@@ -14,7 +14,7 @@
 
         function init() {
             GroupService
-                .findGroupsByIds(vm.currentUser.groups)
+                .findGroupsByIds({ids: vm.currentUser.groups})
                 .then(handleSuccess, handleError);
         }
         init();
