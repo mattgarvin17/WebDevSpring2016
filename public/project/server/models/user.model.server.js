@@ -29,7 +29,7 @@ module.exports = function() {
 
     // use user model find by id
     function findUserById(userId) {
-        return UserModel.findById(userId)
+        return UserModel.findById(ObjectId(userId))
     }
 
     // use user model find by email
@@ -46,11 +46,11 @@ module.exports = function() {
     }
 
     function updateUser(userId, user) {
-        return UserModel.update({_id: userId}, {$set: user});
+        return UserModel.update({_id: ObjectId(userId)}, {$set: user});
     }
 
     function removeUser(userId) {
-        return UserModel.remove({_id: userId});
+        return UserModel.remove({_id: ObjectId(userId)});
     }
 
     function findUserByCredentials(credentials) {

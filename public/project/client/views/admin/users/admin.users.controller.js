@@ -1,12 +1,11 @@
-"use strict";
 
 (function()
 {
     angular
         .module("PollyannaApp")
-        .controller("AdminUsersController", AdminUsersController);
+        .controller("AdminUsersController", adminUsersController);
 
-    function AdminUsersController(UserService, $rootScope)
+    function adminUsersController(UserService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
@@ -39,6 +38,7 @@
 
         function createUser(user)
         {
+            console.log(user);
             UserService
                 .createUser(user)
                 .then(handleSuccess, handleError);

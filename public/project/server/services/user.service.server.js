@@ -11,7 +11,7 @@ module.exports = function(app, userModel) {
     app.post("/api/pollyanna/logout", logout);
     app.post("/api/pollyanna/register", register);
     app.post("/api/pollyanna/user", auth, createUser);
-    app.get("/api/pollyanna/user", auth, findAllUsers);
+    app.get("/api/pollyanna/user", findAllUsers);
     app.put("/api/pollyanna/user/:id", auth, updateUser);
     app.delete("/api/pollyanna/user/:id", auth, deleteUser);
     app.get("/api/pollyanna/user/:id", auth, findUserById);
