@@ -10,13 +10,13 @@
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
-
         vm.createGift = createGift;
         vm.removeGift = removeGift;
         vm.selectGift = selectGift;
         vm.updateGift = updateGift;
 
         function init() {
+            $rootScope.errorMessage = null;
             GiftService
                 .findGiftsByUserId(vm.currentUser._id)
                 .then(handleSuccess, handleError);
@@ -42,10 +42,15 @@
         function createGift(gift)
         {
             gift.userID = vm.currentUser._id;
-            GiftService
-                .createGift(gift)
-                .then(init, handleError);
-            vm.gift = null;
+            if (!gift.itemName) {
+                $rootScope.errorMessage = "Must provide at least an item name."
+            }
+            else {
+                GiftService
+                    .createGift(gift)
+                    .then(init, handleError);
+                vm.gift = null;
+            }
         }
 
         function selectGift(gift)

@@ -2,6 +2,10 @@
 <p>Here you can post ideas for gifts you'd like to receive. Whoever gets assigned to you will be able to see these so they know what kind of
 stuff you're into. Make sure to include suggestions within the price ranges of your groups!</p>
 
+<div ng-show="errorMessage" class="alert alert-danger">
+    <strong>Error:</strong> {{errorMessage}}
+</div>
+
 <table class="table table-striped table-hover">
     <thead>
     <tr>
