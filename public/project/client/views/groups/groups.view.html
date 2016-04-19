@@ -14,8 +14,10 @@ do that from the details page as well. Want to create a new group? Click the "Cr
     </thead>
     <tbody>
     <tr ng-repeat="group in groups">
-        <td>{{group.groupName}}</td>
-        <td>{{group.groupLeaderName}}</td>
+        <td><a href="#/group-details/{{group._id}}">
+            {{group.groupName}}</a></td>
+        <td><a href="#/user-details/{{group.groupLeaderID}}">
+            {{group.groupLeaderName}}</a></td>
         <td>{{group.eventDate}}</td>
     </tr>
     </tbody>

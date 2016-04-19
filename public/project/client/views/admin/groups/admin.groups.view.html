@@ -36,7 +36,8 @@
     </thead>
     <tbody>
     <tr ng-repeat="group in groups">
-        <td>{{group._id}}</td>
+        <td><a href="#/group-details/{{group._id}}">
+            {{group._id}}</a></td>
         <td>{{group.groupName}}</td>
         <td>{{group.groupLeader}}</td>
         <td>{{group.groupLeaderName}}</td>
