@@ -10,7 +10,7 @@
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
-
+        vm.invite = null;
         vm.acceptInvite = acceptInvite;
         vm.declineInvite = declineInvite;
 
@@ -41,7 +41,7 @@
         
         function handleUserSuccess(response) {
             GroupService
-                .findGroupById(invite.groupID)
+                .findGroupById(vm.invite.groupID)
                 .then(handleGroupSuccess, handleError)
         }
 

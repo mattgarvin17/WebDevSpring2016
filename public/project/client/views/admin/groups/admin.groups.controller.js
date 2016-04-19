@@ -4,9 +4,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("AdminGroupsController", AdminGroupsController);
+        .controller("AdminGroupsController", adminGroupsController);
 
-    function AdminGroupsController(GroupService, $rootScope)
+    function adminGroupsController(GroupService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
@@ -35,6 +35,7 @@
             GroupService
                 .updateGroup(group._id, group)
                 .then(handleSuccess, handleError);
+            vm.group = null;
         }
 
         function createGroup(group)
@@ -42,6 +43,7 @@
             GroupService
                 .createGroup(group)
                 .then(handleSuccess, handleError);
+            vm.group = null;
         }
 
         function selectGroup(group)

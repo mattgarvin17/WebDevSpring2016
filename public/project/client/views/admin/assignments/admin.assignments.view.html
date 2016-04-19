@@ -21,25 +21,25 @@ group page or user profile, respectively.</p>
     </tr>
     <tr>
         <th>&nbsp;</th>
-        <th><input ng-model="assignment.groupID" class="form-control"/></th>
-        <th>&nbsp;</th>
-        <th><input ng-model="assignment.giverID" class="form-control"/></th>
-        <th>&nbsp;</th>
-        <th><input ng-model="assignment.receiverID" class="form-control"/></th>
-        <th>&nbsp;</th>
+        <th><input ng-model="model.assignment.groupID" class="form-control"/></th>
+        <th><input ng-model="model.assignment.groupName" class="form-control"/></th>
+        <th><input ng-model="model.assignment.giverID" class="form-control"/></th>
+        <th><input ng-model="model.assignment.giverName" class="form-control"/></th>
+        <th><input ng-model="model.assignment.receiverID" class="form-control"/></th>
+        <th><input ng-model="model.assignment.receiverName" class="form-control"/></th>
         <th>
-            <button ng-click="createAssignment(assignment)" class="btn btn-primary">
+            <button ng-click="model.createAssignment(model.assignment)" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </th>
         <th>
-            <button ng-click="updateAssignment(assignment)" class="btn btn-success">
+            <button ng-click="model.updateAssignment(model.assignment)" class="btn btn-success">
                 &check;</button>
 
         </th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="assignment in assignments">
+    <tr ng-repeat="assignment in model.assignments">
         <td>{{assignment._id}}</td>
         <td>{{assignment.groupID}}</td>
         <td>{{assignment.groupName}}</td>
@@ -48,10 +48,10 @@ group page or user profile, respectively.</p>
         <td>{{assignment.receiverID}}</td>
         <td>{{assignment.receiverName}}</td>
         <td>
-            <button ng-click="removeAssignment(assignment)" class="btn btn-danger">X</button>
+            <button ng-click="model.removeAssignment(assignment)" class="btn btn-danger">X</button>
         </td>
         <td>
-            <button ng-click="selectAssignment(assignment)" class="btn btn-info">
+            <button ng-click="model.selectAssignment(assignment)" class="btn btn-info">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </td>

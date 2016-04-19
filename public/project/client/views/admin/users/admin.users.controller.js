@@ -34,6 +34,7 @@
             UserService
                 .updateUser(user._id, user)
                 .then(handleSuccess, handleError);
+            vm.user = null;
         }
 
         function createUser(user)
@@ -42,6 +43,7 @@
             UserService
                 .createUser(user)
                 .then(handleSuccess, handleError);
+            vm.user = null;
         }
 
         function selectUser(user)

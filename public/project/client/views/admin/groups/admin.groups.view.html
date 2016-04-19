@@ -19,10 +19,10 @@
     <tr>
         <th>&nbsp;</th>
         <th><input ng-model="model.group.groupName" class="form-control"/></th>
-        <th><input ng-model="model.group.groupLeader" class="form-control"/></th>
+        <th><input ng-model="model.group.groupLeaderID" class="form-control"/></th>
         <th><input ng-model="model.group.groupLeaderName" class="form-control"/></th>
         <th><input ng-model="model.group.members" class="form-control"/></th>
-        <th><input ng-model="model.group.eventDate" class="form-control"/></th>
+        <th><input type="date" ng-model="model.group.eventDate" class="form-control"/></th>
         <th><input ng-model="model.group.priceRange" class="form-control"/></th>
         <th>
             <button ng-click="createGroup(model.group)" class="btn btn-primary">
@@ -39,16 +39,16 @@
         <td><a href="#/group-details/{{group._id}}">
             {{group._id}}</a></td>
         <td>{{group.groupName}}</td>
-        <td>{{group.groupLeader}}</td>
+        <td>{{group.groupLeaderID}}</td>
         <td>{{group.groupLeaderName}}</td>
         <td>{{group.members}}</td>
         <td>{{group.eventDate}} </td>
         <td>{{group.priceRange}}</td>
         <td>
-            <button ng-click="removeGroup(model.group)" class="btn btn-danger">X</button>
+            <button ng-click="model.removeGroup(group)" class="btn btn-danger">X</button>
         </td>
         <td>
-            <button ng-click="selectGroup(model.group)" class="btn btn-info">
+            <button ng-click="model.selectGroup(group)" class="btn btn-info">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </td>

@@ -10,14 +10,36 @@ module.exports = function(app, assignmentModel) {
     app.get("/api/pollyanna/assignment/group/:groupID", findAllAssignmentsByGroupId);
     app.get("/api/pollyanna/assignment/giver/:giverID", findAllAssignmentsByGiverId);
 
- 
+    function createAssignment(req, res) {
+        var newAssignment = req.body;
+        assignmentModel.createAssignment(newAssignment)
+            .then(
+                function (assignment) {
+                    return assignmentModel.findAllAssignments();
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (assignments) {
+                    res.json(assignments);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    /*
+    // version of create assignment that would ensure no duplicated assignments, something is wrong with it
     function createAssignment(req, res) {
         var newAssignment = req.body;
 
         assignmentModel.findAssignmentByGroupAndReceiver(newAssignment.groupID, newAssignment.receiverID)
             .then(
-                function(invite) {
-                    if (!invite) {
+                function(assignment) {
+                    if (!assignment) {
                         res.json(null);
                     }
                     else {
@@ -46,6 +68,7 @@ module.exports = function(app, assignmentModel) {
                 }
             );
     }
+    */
 
     function updateAssignment(req, res) {
         var newAssignment = req.body;

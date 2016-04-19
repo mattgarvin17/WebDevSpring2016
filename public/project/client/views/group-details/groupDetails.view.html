@@ -3,7 +3,11 @@
         </p>
     <p ng-if="model.leaderMode">
         <a class="btn btn-lg btn-danger" ng-click="model.deleteGroup()" role="button">Delete Group</a>
+        <a class="btn btn-lg btn-primary" ng-click="model.generateAssignments()" role="button">Generate Assignments</a>
     </p>
+    <div ng-show="model.assignmentErrorMessage" class="alert alert-warning">
+        <strong>Error:</strong> {{model.assignmentErrorMessage}}
+    </div>
     <hr class="divider">
     <div class="row featurette">
         <div class="col-md-7">

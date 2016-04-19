@@ -11,14 +11,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="invite in invites">
+    <tr ng-repeat="invite in model.invites">
         <td>{{invite.senderName}}</td>
         <td>{{invite.groupName}}</td>
         <td>
-        <button ng-click="declineInvite(invite)" class="btn btn-danger">X</button>
+        <button ng-click="model.declineInvite(invite)" class="btn btn-danger">X</button>
         </td>
         <td>
-            <button ng-click="acceptInvite(invite)" class="btn btn-success">
+            <button ng-click="model.acceptInvite(invite)" class="btn btn-success">
                 &check;
             </button>
         </td>

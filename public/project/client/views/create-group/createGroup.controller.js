@@ -1,3 +1,5 @@
+"use strict";
+
 (function(){
     angular
         .module("PollyannaApp")
@@ -23,7 +25,7 @@
                         newGroup.groupName = group.groupName;
                         newGroup.groupLeaderID = vm.currentUser._id;
                         newGroup.groupLeaderName = vm.currentUser.firstName + " " + vm.currentUser.lastName;
-                        newGroup.members = [vm.currentUser._id];
+                        newGroup.members = [newGroup.groupLeaderID];
                         newGroup.eventDate = group.eventDate.toString();
                         newGroup.priceRange = group.priceRange;
                         GroupService

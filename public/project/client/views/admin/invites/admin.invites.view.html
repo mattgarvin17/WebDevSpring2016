@@ -22,25 +22,25 @@ to and the invite is deleted. Only group leaders and admins can create invites. 
     </tr>
     <tr>
         <th>&nbsp;</th>
-        <th><input ng-model="invite.groupID" class="form-control"/></th>
-        <th>&nbsp;</th>
-        <th><input ng-model="invite.senderID" class="form-control"/></th>
-        <th>&nbsp;</th>
-        <th><input ng-model="invite.receiverID" class="form-control"/></th>
-        <th>&nbsp;</th>
+        <th><input ng-model="model.invite.groupID" class="form-control"/></th>
+        <th><input ng-model="model.invite.groupName" class="form-control"/></th>
+        <th><input ng-model="model.invite.senderID" class="form-control"/></th>
+        <th><input ng-model="model.invite.senderName" class="form-control"/></th>
+        <th><input ng-model="model.invite.receiverID" class="form-control"/></th>
+        <th><input ng-model="model.invite.receiverName" class="form-control"/></th>
         <th>
-            <button ng-click="createInvite(invite)" class="btn btn-primary">
+            <button ng-click="model.createInvite(model.invite)" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </th>
         <th>
-            <button ng-click="updateInvite(invite)" class="btn btn-success">
+            <button ng-click="model.updateInvite(model.invite)" class="btn btn-success">
                 &check;</button>
 
         </th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="invite in invites">
+    <tr ng-repeat="invite in model.invites">
         <td>{{invite._id}}</td>
         <td>{{invite.groupID}}</td>
         <td>{{invite.groupName}}</td>
@@ -49,10 +49,10 @@ to and the invite is deleted. Only group leaders and admins can create invites. 
         <td>{{invite.receiverID}}</td>
         <td>{{invite.receiverName}}</td>
         <td>
-            <button ng-click="removeInvite(invite)" class="btn btn-danger">X</button>
+            <button ng-click="model.removeInvite(invite)" class="btn btn-danger">X</button>
         </td>
         <td>
-            <button ng-click="selectInvite(invite)" class="btn btn-info">
+            <button ng-click="model.selectInvite(invite)" class="btn btn-info">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
         </td>

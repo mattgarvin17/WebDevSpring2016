@@ -4,9 +4,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("AdminAssignmentsController", AdminAssignmentsController);
+        .controller("AdminAssignmentsController", adminAssignmentsController);
 
-    function AdminAssignmentsController(AssignmentService, $rootScope)
+    function adminAssignmentsController(AssignmentService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
@@ -35,6 +35,7 @@
             AssignmentService
                 .updateAssignment(assignment._id, assignment)
                 .then(handleSuccess, handleError);
+            vm.assignment = null;
         }
 
         function createAssignment(assignment)
@@ -42,6 +43,7 @@
             AssignmentService
                 .createAssignment(assignment)
                 .then(handleSuccess, handleError);
+            vm.assignment = null;
         }
 
         function selectAssignment(assignment)

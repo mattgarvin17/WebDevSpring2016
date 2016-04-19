@@ -4,9 +4,9 @@
 {
     angular
         .module("PollyannaApp")
-        .controller("AdminInvitesController", AdminInvitesController);
+        .controller("AdminInvitesController", adminInvitesController);
 
-    function AdminInvitesController(InviteService, $rootScope)
+    function adminInvitesController(InviteService, $rootScope)
     {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
@@ -35,6 +35,7 @@
             InviteService
                 .updateInvite(invite._id, invite)
                 .then(handleSuccess, handleError);
+            vm.invite = null;
         }
 
         function createInvite(invite)
@@ -42,6 +43,7 @@
             InviteService
                 .createInvite(invite)
                 .then(handleSuccess, handleError);
+            vm.invite = null;
         }
 
         function selectInvite(invite)
