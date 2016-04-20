@@ -1,10 +1,11 @@
 module.exports = function(app) {
 
     var userModel    = require("./models/user.model.server.js")();
-    var userService  = require("./services/user.service.server.js")(app, userModel);
 
     var groupModel    = require("./models/group.model.server.js")();
-    var groupService  = require("./services/group.service.server.js")(app, groupModel);
+    var groupService  = require("./services/group.service.server.js")(app, groupModel, userModel);
+
+    var userService  = require("./services/user.service.server.js")(app, userModel, groupModel);
 
     var giftModel    = require("./models/gift.model.server.js")();
     var giftService  = require("./services/gift.service.server.js")(app, giftModel);

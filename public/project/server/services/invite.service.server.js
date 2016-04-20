@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 module.exports = function(app, inviteModel) {
 
     app.post("/api/pollyanna/invite", createInvite);
+    app.get("/api/pollyanna/invite", findAllInvites);
     app.put("/api/pollyanna/invite/:id", updateInvite);
     app.delete("/api/pollyanna/invite/:id", deleteInvite);
-    app.get("/api/pollyanna/invite", findAllInvites);
     app.get("/api/pollyanna/invite/:id", findInviteById);
     app.get("/api/pollyanna/invite/group/:groupID", findAllInvitesByGroupId);
     app.get("/api/pollyanna/invite/receiver/:receiverID", findAllInvitesByReceiverId);
@@ -71,7 +71,7 @@ module.exports = function(app, inviteModel) {
 
     function deleteInvite(req, res) {
         inviteModel
-            .removeInvite(req.params.id)
+            .deleteInvite(req.params.id)
             .then(
                 function(invite){
                     return inviteModel.findAllInvites();

@@ -95,7 +95,7 @@ module.exports = function(app, assignmentModel) {
     
     function deleteAssignment(req, res) {
         assignmentModel
-            .removeAssignment(req.params.id)
+            .deleteAssignment(req.params.id)
             .then(
                 function(assignment){
                     return assignmentModel.findAllAssignments();

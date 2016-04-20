@@ -6,8 +6,8 @@
                  width="450px" height="450px" alt="Profile Picture">
         </div>
         <div class="col-md-5">
-            <h2 class="featurette-heading">{{user.firstName}} {{user.lastName}}<span class="text-muted">&nbsp; {{user.email}}</span></h2>
-            <p class="lead">Have you been assigned to {{user.firstName}} for a Pollyanna group? Check out their gift suggestions below!</p>
+            <h2 class="featurette-heading">{{model.user.firstName}} {{model.user.lastName}}<span class="text-muted">&nbsp; {{model.user.email}}</span></h2>
+            <p class="lead">Have you been assigned to {{model.user.firstName}} for a Pollyanna group? Check out their gift suggestions below!</p>
         </div>
     </div>
     <hr class="divider">
@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="gift in gifts">
+        <tr ng-repeat="gift in model.gifts">
             <td>{{gift.itemName}}</td>
             <td>{{gift.price}}</td>
             <td>{{gift.itemDescription}}</td>

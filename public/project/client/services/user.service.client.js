@@ -15,18 +15,15 @@
             deleteUser: deleteUser,
             findAllUsers: findAllUsers,
             findUserById: findUserById,
-            findUsersByIds: findUsersByIds,
-            findUserByEmail: findUserByEmail
+            findUsersByGroup: findUsersByGroup,
+            findAllUsersSafe: findAllUsersSafe
 
         };
         return api;
+        
 
-        function findUserByEmail(userEmail) {
-            return $http.get("/api/pollyanna/user/email", userEmail);
-        }
-
-        function findUsersByIds(userIDs) {
-            return $http.get("/api/pollyanna/user/array", userIDs);
+        function findUsersByGroup(groupID) {
+            return $http.get("/api/pollyanna/user/array/"+groupID);
         }
 
         function findUserById(userID) {
@@ -67,6 +64,10 @@
 
         function findAllUsers() {
             return $http.get("/api/pollyanna/user");
+        }
+        
+        function findAllUsersSafe() {
+            return $http.get("/api/pollyanna/safe/user");
         }
     }
 })();

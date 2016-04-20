@@ -69,7 +69,7 @@
                     loggedin: checkLoggedin
                 }
             })
-            .when('/user-details/userID', {
+            .when('/user-details/:userID', {
                 templateUrl: 'views/user-details/userDetails.view.html',
                 controller: 'UserDetailsController',
                 controllerAs: 'model',

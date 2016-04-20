@@ -64,7 +64,7 @@ module.exports = function(app, giftModel) {
 
     function deleteGift(req, res) {
         giftModel
-            .removeGift(req.params.id)
+            .deleteGift(req.params.id)
             .then(
                 function(gift){
                     return giftModel.findAllGifts();

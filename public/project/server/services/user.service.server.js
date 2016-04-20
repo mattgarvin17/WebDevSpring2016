@@ -2,7 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 
-module.exports = function(app, userModel) {
+module.exports = function(app, userModel, groupModel) {
 
     var auth = authorized;
 
@@ -11,12 +11,12 @@ module.exports = function(app, userModel) {
     app.post("/api/pollyanna/logout", logout);
     app.post("/api/pollyanna/register", register);
     app.post("/api/pollyanna/user", auth, createUser);
-    app.get("/api/pollyanna/user", findAllUsers);
+    app.get("/api/pollyanna/user", auth, findAllUsers);
+    app.get("/api/pollyanna/safe/user", auth, findAllUsersSafe);
+    app.get("/api/pollyanna/user/array/:id", auth, findUsersByGroup);
     app.put("/api/pollyanna/user/:id", auth, updateUser);
     app.delete("/api/pollyanna/user/:id", auth, deleteUser);
     app.get("/api/pollyanna/user/:id", auth, findUserById);
-    app.get("/api/pollyanna/user/array", auth, findUsersByIds);
-    app.get("/api/pollyanna/user/email", auth, findUserByEmail);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -114,13 +114,14 @@ module.exports = function(app, userModel) {
     }
 
     function isAdmin(user) {
-        if(user.roles.indexOf("admin") > 0) {
+        if(user.roles.indexOf("admin") >= 0) {
             return true
         }
         return false;
     }
 
     function findAllUsers(req, res) {
+        console.log("findAllUsers");
         if(isAdmin(req.user)) {
             userModel
                 .findAllUsers()
@@ -143,6 +144,9 @@ module.exports = function(app, userModel) {
             newUser.roles = newUser.roles.split(",");
         } else {
             newUser.roles = ["standard"];
+        }
+        if(typeof newUser.groups == "string") {
+            newUser.groups = newUser.groups.split(",");
         }
 
         userModel
@@ -216,6 +220,9 @@ module.exports = function(app, userModel) {
         if(typeof newUser.roles == "string") {
             newUser.roles = newUser.roles.split(",");
         }
+        if(typeof newUser.groups == "string") {
+            newUser.groups = newUser.groups.split(",");
+        }
 
         userModel
             .updateUser(req.params.id, newUser)
@@ -250,32 +257,37 @@ module.exports = function(app, userModel) {
             )
     }
 
-    function findUsersByIds(req, res) {
-        var IDs = req.body;
+    function findUsersByGroup(req, res) {
+        groupModel
+            .findGroupById(req.params.id)
+            .then(function(group) {
+                userModel
+                    .findUsersByIds(group.members)
+                    .then(
+                        function(users){
+                            res.json(users);
+                        },
+                        function(err){
+                            res.status(400).send(err);
+                        }
+                    );
+            });
+    }
+
+    function findAllUsersSafe(req, res) {
         userModel
-            .findUsersByIds(IDs)
+            .findAllUsers()
             .then(
-                function(users){
+                function (users) {
+                    for (user in users){
+                        delete user.password;
+                    }
                     res.json(users);
                 },
-                function(err){
+                function () {
                     res.status(400).send(err);
                 }
             );
-    }
-    
-    function findUserByEmail(req, res) {
-        var email = req.body;
-        userModel
-            .findUserByEmail(email)
-            .then(
-                function(user){
-                    res.json(user);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            )
     }
 
 }

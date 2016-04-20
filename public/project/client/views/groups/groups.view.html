@@ -13,7 +13,7 @@ do that from the details page as well. Want to create a new group? Click the "Cr
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="group in groups">
+    <tr ng-repeat="group in model.groups">
         <td><a href="#/group-details/{{group._id}}">
             {{group.groupName}}</a></td>
         <td><a href="#/user-details/{{group.groupLeaderID}}">

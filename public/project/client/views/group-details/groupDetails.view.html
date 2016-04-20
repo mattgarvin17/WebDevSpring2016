@@ -58,7 +58,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in users">
+        <tr ng-repeat="user in model.users">
             <td><a href="#/user-details/{{user._id}}">{{user.firstName}} {{user.lastName}}</a></td>
             <td>{{user.email}}</td>
         </tr>

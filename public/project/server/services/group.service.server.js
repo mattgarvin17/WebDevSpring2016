@@ -1,27 +1,38 @@
 var mongoose = require('mongoose');
 
-module.exports = function(app, groupModel) {
+module.exports = function(app, groupModel, userModel) {
 
+    app.get("/api/pollyanna/group", findAllGroups);
     app.post("/api/pollyanna/group", createGroup);
     app.put("/api/pollyanna/group/:id", updateGroup);
     app.delete("/api/pollyanna/group/:id", deleteGroup);
-    app.get("/api/pollyanna/group", findAllGroups);
+    app.get("/api/pollyanna/group/user/:id", findGroupsByUser);
     app.get("/api/pollyanna/group/:id", findGroupById);
     app.get("/api/pollyanna/group/leader/:id", findAllGroupsByLeaderId);
-    app.get("/api/pollyanna/group/array", findGroupsByIds);
+
 
 
 
     function createGroup(req, res) {
         var newGroup = req.body;
-        if(newGroup.members && newGroup.members.length > 1) {
+        if(typeof newGroup.members == "string")  {
             newGroup.members = newGroup.members.split(",");
-        } else {
-            newGroup.members = [];
+        }
+        else {
+            newGroup.members = [newGroup.groupLeaderID.toString()];
         }
             groupModel.createGroup(newGroup)
                 .then(
                     function (group) {
+                        userModel
+                            .findUserById(newGroup.groupLeaderID)
+                            .then(
+                                function(user){
+                                    user.groups.push(group._id);
+                                    userModel
+                                        .updateUser(user._id, user);
+                                }
+                            )
                         return groupModel.findAllGroups();
                     },
                     function (err) {
@@ -65,7 +76,7 @@ module.exports = function(app, groupModel) {
 
     function deleteGroup(req, res) {
         groupModel
-            .removeGroup(req.params.id)
+            .deleteGroup(req.params.id)
             .then(
                 function(group){
                     return groupModel.findAllGroups();
@@ -108,19 +119,23 @@ module.exports = function(app, groupModel) {
             )
     }
 
-    function findGroupsByIds(req, res) {
-        var IDs = req.body;
-        groupModel
-            .findGroupsByIds(IDs)
-            .then(
-                function(groups){
-                    res.json(groups);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
-    }
+    function findGroupsByUser(req, res) {
+        userModel
+            .findUserById(req.params.id)
+            .then(function(user){
+                groupModel
+                    .findGroupsByIds(user.groups)
+                    .then(
+                        function(groups){
+                            res.json(groups);
+                        },
+                        function(err){
+                            res.status(400).send(err);
+                        }
+                    );}
+                )};
+
+
 
     function findAllGroupsByLeaderId(req, res) {
         groupModel.findAllGroupsByLeaderId(req.params.id)

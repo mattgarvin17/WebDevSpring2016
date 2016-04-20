@@ -24,11 +24,11 @@ module.exports = function() {
     }
 
     function updateGroup(groupID, group) {
-        return GroupModel.update({_id: ObjectId(groupID)}, {$set: group});
+        return GroupModel.update({_id: groupID}, {$set: group});
     }
 
     function deleteGroup(groupID) {
-        return GroupModel.remove({_id: ObjectId(groupID)});
+        return GroupModel.remove({_id: groupID});
     }
 
     function findAllGroups() {
@@ -36,12 +36,12 @@ module.exports = function() {
     }
 
     function findGroupById(groupID) {
-        return GroupModel.findById(ObjectId(groupID));
+        return GroupModel.findById(groupID);
     }
 
     function findGroupsByIds(groupIDs) {
         return GroupModel.find({
-            '_id': { $in: groupIDs.ids.map(ObjectId)}
+            '_id': { $in: groupIDs}
         });
     }
 

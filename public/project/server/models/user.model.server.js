@@ -23,13 +23,13 @@ module.exports = function() {
 
     function findUsersByIds(userIds) {
         return UserModel.find({
-            '_id': { $in: userIds.ids.map(ObjectId)}
+            '_id': { $in: userIds}
         });
     }
 
     // use user model find by id
     function findUserById(userId) {
-        return UserModel.findById(ObjectId(userId))
+        return UserModel.findById(userId)
     }
 
     // use user model find by email
@@ -46,11 +46,11 @@ module.exports = function() {
     }
 
     function updateUser(userId, user) {
-        return UserModel.update({_id: ObjectId(userId)}, {$set: user});
+        return UserModel.update({_id: userId}, {$set: user});
     }
 
     function removeUser(userId) {
-        return UserModel.remove({_id: ObjectId(userId)});
+        return UserModel.remove({_id: userId});
     }
 
     function findUserByCredentials(credentials) {

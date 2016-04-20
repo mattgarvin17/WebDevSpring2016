@@ -27,10 +27,8 @@
                     vm.group = response.data;
                     vm.newGroup = angular.copy(vm.group);
                     console.log(vm.group);
-                    var members = {};
-                    members.ids = vm.group.members;
                     UserService
-                        .findUsersByIds(members)
+                        .findUsersByGroup(vm.group._id)
                         .then(function (response) {
                             vm.users = response.data;
                             console.log(vm.users);
@@ -179,13 +177,20 @@
 
         function inviteUser() {
             UserService
-                .findUserByEmail(vm.invitedEmail)
+                .findAllUsersSafe()
                 .then(function (response) {
-                    vm.invitedUser = response.data;
+                    var users = response.data;
+                    for (user in users) {
+                        if (user.email == vm.invitedEmail) {
+                            vm.invitedUser = user;
+                        }
+                    }
                     if (!vm.invitedUser) {
                         $rootScope.errorMessage = "No user found with that email address."
                     }
                     else {
+                        $rootScope.errorMessage = null;
+                        vm.invitedEmail = null;
                         var newInvite = {};
                         newInvite.senderID = vm.currentUser._id;
                         newInvite.senderName = vm.currentUser.firstName + vm.currentUser.lastName;
@@ -196,7 +201,7 @@
                         InviteService
                             .createInvite(newInvite)
                             .then(function(response) {
-                                success = response.data;
+                                var success = response.data;
                                 if (!success) {
                                     $rootScope.errorMessage = "This user is already invited!"
                                 }

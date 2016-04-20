@@ -26,7 +26,7 @@
                         newGroup.groupLeaderID = vm.currentUser._id;
                         newGroup.groupLeaderName = vm.currentUser.firstName + " " + vm.currentUser.lastName;
                         newGroup.members = [newGroup.groupLeaderID];
-                        newGroup.eventDate = group.eventDate.toString();
+                        newGroup.eventDate = group.eventDate;
                         newGroup.priceRange = group.priceRange;
                         GroupService
                             .createGroup(newGroup)
