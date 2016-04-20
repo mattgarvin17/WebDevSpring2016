@@ -11,7 +11,11 @@
         console.log(vm.currentUser._id)
 
         function init() {
+            if (vm.currentUser._id == id) {
+                $location.url("/profile");
+            }
             UserService
+                // should use safe version of find by id so server never responds with password
                 .findUserById(id)
                 .then(function (response) {
                     vm.user = response.data;
