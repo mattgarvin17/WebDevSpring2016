@@ -171,7 +171,7 @@
             GroupService
                 .deleteGroup(vm.group._id)
                 .then(function (response) {
-                    $location = "/groups";
+                    $location.url("/groups");
                 });
         }
 
