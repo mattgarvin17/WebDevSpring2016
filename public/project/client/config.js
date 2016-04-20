@@ -159,6 +159,12 @@
                 $location.url('/home');
                 deferred.resolve();
             }
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
         });
 
         return deferred.promise;

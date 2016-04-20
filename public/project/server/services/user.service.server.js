@@ -12,6 +12,7 @@ module.exports = function(app, userModel, groupModel) {
     app.post("/api/pollyanna/register", register);
     app.post("/api/pollyanna/user", auth, createUser);
     app.get("/api/pollyanna/user", auth, findAllUsers);
+    app.post("/api/pollyanna/user/email", auth, findUserByEmail);
     app.get("/api/pollyanna/safe/user", auth, findAllUsersSafe);
     app.get("/api/pollyanna/user/array/:id", auth, findUsersByGroup);
     app.put("/api/pollyanna/user/:id", auth, updateUser);
@@ -53,6 +54,20 @@ module.exports = function(app, userModel, groupModel) {
             );
     }
 
+    function findUserByEmail(req, res) {
+        var email = req.body.email;
+        userModel
+            .findUserByEmail(email)
+            .then(function(user){
+                if(user) {
+                    delete user.password;
+                    res.json(user);
+                }
+                else {
+                    res.json(null);
+                }
+            })
+    }
 
     function register(req, res) {
         var newUser = req.body;
@@ -140,7 +155,7 @@ module.exports = function(app, userModel, groupModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        if(newUser.roles && newUser.roles.length > 1) {
+        if(newUser.roles && typeof newUser.roles == "string") {
             newUser.roles = newUser.roles.split(",");
         } else {
             newUser.roles = ["standard"];

@@ -16,7 +16,8 @@
             findAllUsers: findAllUsers,
             findUserById: findUserById,
             findUsersByGroup: findUsersByGroup,
-            findAllUsersSafe: findAllUsersSafe
+            findAllUsersSafe: findAllUsersSafe,
+            findUserByEmail: findUserByEmail
 
         };
         return api;
@@ -68,6 +69,10 @@
         
         function findAllUsersSafe() {
             return $http.get("/api/pollyanna/safe/user");
+        }
+        
+        function findUserByEmail(email) {
+            return $http.post("/api/pollyanna/user/email", {email: email});
         }
     }
 })();

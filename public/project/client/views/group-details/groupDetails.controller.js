@@ -7,7 +7,6 @@
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
         vm.leaderMode = null;
-        vm.invitedEmail = null;
         vm.group = null;
         vm.assignmentErrorMessage = null;
         vm.leaveGroup = leaveGroup;
@@ -107,11 +106,12 @@
 
         function leaveGroup() {
             var index = vm.currentUser.groups.indexOf(vm.group._id);
-            vm.currentUser.groups.splice(1, index);
+            var newUser = angular.copy(vm.currentUser);
+            newUser.groups = newUser.groups.splice(1, index);
             UserService
-                .updateUser(vm.currentUser._id, vm.currentUser)
+                .updateUser(vm.currentUser._id, newUser)
                 .then(function (response) {
-                    $location = "/groups";
+                    $location.url("/groups");
                 });
         }
 
@@ -176,15 +176,12 @@
         }
 
         function inviteUser() {
+            console.log(vm.invitedEmail);
             UserService
-                .findAllUsersSafe()
-                .then(function (response) {
-                    var users = response.data;
-                    for (user in users) {
-                        if (user.email == vm.invitedEmail) {
-                            vm.invitedUser = user;
-                        }
-                    }
+                .findUserByEmail(vm.invitedEmail)
+                .then(function (user) {
+                        vm.invitedUser = user;
+                    
                     if (!vm.invitedUser) {
                         $rootScope.errorMessage = "No user found with that email address."
                     }
@@ -193,9 +190,9 @@
                         vm.invitedEmail = null;
                         var newInvite = {};
                         newInvite.senderID = vm.currentUser._id;
-                        newInvite.senderName = vm.currentUser.firstName + vm.currentUser.lastName;
+                        newInvite.senderName = vm.currentUser.firstName + " " + vm.currentUser.lastName;
                         newInvite.receiverID = vm.invitedUser._id;
-                        newInvite.receiverName = vm.invitedUser.firstName + vm.invitedUser.lastName;
+                        newInvite.receiverName = vm.invitedUser.firstName + " " + vm.invitedUser.lastName;
                         newInvite.groupID = vm.group._id;
                         newInvite.groupName = vm.group.groupName;
                         InviteService

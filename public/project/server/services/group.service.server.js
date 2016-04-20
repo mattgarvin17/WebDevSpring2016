@@ -24,6 +24,9 @@ module.exports = function(app, groupModel, userModel) {
             groupModel.createGroup(newGroup)
                 .then(
                     function (group) {
+                        return group;
+                    })
+                .then(function (group) {
                         userModel
                             .findUserById(newGroup.groupLeaderID)
                             .then(
