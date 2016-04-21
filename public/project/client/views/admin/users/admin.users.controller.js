@@ -33,7 +33,7 @@
         {
             var newUser = {};
             newUser.email = user.email;
-            newUser.password = user.email;
+            newUser.password = user.password;
             newUser.firstName = user.firstName;
             newUser.lastName = user.lastName;
             newUser.groups = user.groups;
