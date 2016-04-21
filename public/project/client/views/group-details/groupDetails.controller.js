@@ -150,7 +150,7 @@
                                         location.reload();
                                     }
                                     else {
-                                        $rootScope.errorMessage = "There was a problem creating your group."
+                                        $rootScope.errorMessage = "There was a problem updating your group."
                                     }
 
                                 },

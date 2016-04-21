@@ -32,8 +32,15 @@
 
         function updateAssignment(assignment)
         {
+            var newAssignment = {};
+            newAssignment.groupID = assignment.groupID;
+            newAssignment.groupName = assignment.groupName;
+            newAssignment.giverID = assignment.giverID;
+            newAssignment.giverName = assignment.giverName;
+            newAssignment.receiverID = assignment.receiverID;
+            newAssignment.receiverName = assignment.receiverName;
             AssignmentService
-                .updateAssignment(assignment._id, assignment)
+                .updateAssignment(assignment._id, newAssignment)
                 .then(handleSuccess, handleError);
             vm.assignment = null;
         }

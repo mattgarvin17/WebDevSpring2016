@@ -32,8 +32,13 @@
 
         function updateGift(gift)
         {
+            var newGift = {};
+            newGift.itemName = gift.itemName;
+            newGift.price = gift.price;
+            newGift.itemDescription = gift.itemDescription;
+            newGift.itemLink = gift.itemLink;
             GiftService
-                .updateGift(gift._id, gift)
+                .updateGift(gift._id, newGift)
                 .then(handleSuccess, handleError);
             vm.gift = null;
         }

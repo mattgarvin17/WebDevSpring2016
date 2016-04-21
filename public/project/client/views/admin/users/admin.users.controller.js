@@ -31,8 +31,15 @@
 
         function updateUser(user)
         {
+            var newUser = {};
+            newUser.email = user.email;
+            newUser.password = user.email;
+            newUser.firstName = user.firstName;
+            newUser.lastName = user.lastName;
+            newUser.groups = user.groups;
+            newUser.roles = user.roles;
             UserService
-                .updateUser(user._id, user)
+                .updateUser(user._id, newUser)
                 .then(handleSuccess, handleError);
             vm.user = null;
         }

@@ -32,8 +32,15 @@
 
         function updateGroup(group)
         {
+            var newGroup = {};
+            newGroup.groupName = group.groupName;
+            newGroup.groupLeaderID = group.groupLeaderID;
+            newGroup.groupLeaderName = group.groupLeaderName;
+            newGroup.members = group.members;
+            newGroup.priceRange = group.priceRange;
+            newGroup.eventDate = group.eventDate;
             GroupService
-                .updateGroup(group._id, group)
+                .updateGroup(group._id, newGroup)
                 .then(handleSuccess, handleError);
             vm.group = null;
         }

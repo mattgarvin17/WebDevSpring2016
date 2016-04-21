@@ -32,8 +32,15 @@
 
         function updateInvite(invite)
         {
+            var newInvite = {};
+            newInvite.senderID = invite.senderID;
+            newInvite.senderName = invite.senderName;
+            newInvite.receiverID = invite.receiverID;
+            newInvite.receiverName = invite.receiverName;
+            newInvite.groupID = invite.groupID;
+            newInvite.groupName = invite.groupName;
             InviteService
-                .updateInvite(invite._id, invite)
+                .updateInvite(invite._id, newInvite)
                 .then(handleSuccess, handleError);
             vm.invite = null;
         }
