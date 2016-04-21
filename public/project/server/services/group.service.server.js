@@ -29,8 +29,9 @@ module.exports = function(app, groupModel, userModel) {
                             .then(
                                 function(user){
                                     user.groups.push(group._id);
-                                    userModel
-                                        .updateUser(user._id, user);
+                                    return user.save();
+                                    //userModel
+                                    //    .updateUser(user._id, user);
                                 }
                             )
                         return groupModel.findAllGroups();

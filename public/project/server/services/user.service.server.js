@@ -14,6 +14,7 @@ module.exports = function(app, userModel, groupModel) {
     app.get("/api/pollyanna/user", auth, findAllUsers);
     app.post("/api/pollyanna/user/email", auth, findUserByEmail);
     app.get("/api/pollyanna/safe/user", auth, findAllUsersSafe);
+    app.post("/api/pollyanna/user/array", auth, findUsersByIds);
     app.get("/api/pollyanna/user/array/:id", auth, findUsersByGroup);
     app.put("/api/pollyanna/user/:id", auth, updateUser);
     app.delete("/api/pollyanna/user/:id", auth, deleteUser);
@@ -53,6 +54,16 @@ module.exports = function(app, userModel, groupModel) {
                 }
             );
     }
+
+    function findUsersByIds(req, res) {
+        var userIDs = req.body.userIDs;
+        userModel
+            .findUsersByIds(userIDs)
+            .then(function(users) {
+                res.json(users);
+            })
+    }
+
 
     function findUserByEmail(req, res) {
         var email = req.body.email;
@@ -136,7 +147,6 @@ module.exports = function(app, userModel, groupModel) {
     }
 
     function findAllUsers(req, res) {
-        console.log("findAllUsers");
         if(isAdmin(req.user)) {
             userModel
                 .findAllUsers()

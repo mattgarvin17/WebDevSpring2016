@@ -11,8 +11,10 @@ to decide when the assignments are generated. Maybe they're just waiting for mor
     </thead>
     <tbody>
         <tr ng-repeat="assignment in model.assignments">
-            <td>{{assignment.groupName}}</td>
-            <td>{{assignment.receiverName}}</td>
+            <td><a href="#/group-details/{{assignment.groupID}}">
+                   {{assignment.groupName}}</a></td>
+            <td><a href="#/user-details/{{assignment.receiverID}}">
+                   {{assignment.receiverName}}</a></td>
         </tr>
     </tbody>
 

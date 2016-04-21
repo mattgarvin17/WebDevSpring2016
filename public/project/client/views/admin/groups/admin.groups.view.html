@@ -3,6 +3,10 @@
     particular group you may find it easier to visit that group's details page. To get there, just click the name of the group below.
 </p>
 
+<div ng-show="errorMessage" class="alert alert-danger">
+    <strong>Error:</strong> {{errorMessage}}
+</div>
+
 <table class="table table-striped table-hover">
     <thead>
     <tr>
@@ -25,11 +29,11 @@
         <th><input type="date" ng-model="model.group.eventDate" class="form-control"/></th>
         <th><input ng-model="model.group.priceRange" class="form-control"/></th>
         <th>
-            <button ng-click="createGroup(model.group)" class="btn btn-primary">
+            <button ng-click="model.createGroup(model.group)" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </th>
         <th>
-            <button ng-click="updateGroup(model.group)" class="btn btn-success">
+            <button ng-click="model.updateGroup(model.group)" class="btn btn-success">
                 &check;</button>
         </th>
     </tr>
@@ -42,7 +46,7 @@
         <td>{{group.groupLeaderID}}</td>
         <td>{{group.groupLeaderName}}</td>
         <td>{{group.members}}</td>
-        <td>{{group.eventDate}} </td>
+        <td>{{group.eventDate | date }} </td>
         <td>{{group.priceRange}}</td>
         <td>
             <button ng-click="model.removeGroup(group)" class="btn btn-danger">X</button>

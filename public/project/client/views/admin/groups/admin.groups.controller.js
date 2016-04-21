@@ -55,7 +55,9 @@
 
         function selectGroup(group)
         {
-            vm.group = angular.copy(group);
+            var newGroup = angular.copy(group);
+            newGroup.eventDate = new Date(newGroup.eventDate);
+            vm.group = newGroup;
         }
 
         function handleSuccess(response) {

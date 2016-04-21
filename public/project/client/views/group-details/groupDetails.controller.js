@@ -24,7 +24,9 @@
                 .findGroupById(id)
                 .then(function (response) {
                     vm.group = response.data;
-                    vm.newGroup = angular.copy(vm.group);
+                    var newGroup = angular.copy(vm.group);
+                    newGroup.eventDate = new Date(newGroup.eventDate);
+                    vm.newGroup = newGroup;
                     console.log(vm.group);
                     UserService
                         .findUsersByGroup(vm.group._id)
@@ -61,15 +63,8 @@
             return array;
         }
 
-        function getUserName(userID) {
-            var name = null;
-            UserService
-                .findUserById(userID)
-                .then(function(response) {
-                    var user = response.data;
-                    name = user.firstName + " " + user.lastName;
-                });
-            return name;
+        function getUserName(user) {
+            return user.firstName + " " + user.lastName;
         }
 
         function generateAssignments() {
@@ -77,7 +72,7 @@
                 .findAssignmentsByGroupId(vm.group._id)
                 .then(function(response) {
                     console.log(response.data);
-                    if (response.data) {
+                    if (response.data.length) {
                         vm.assignmentErrorMessage = "You've already created assignments for this group!"
                     }
                     else {
@@ -88,27 +83,37 @@
                         else {
                             var givers = vm.group.members.slice();
                             shuffle(givers);
-                            var len = givers.length;
-                            var receivers = [];
-                            for (i = 0; i < len; i++) {
-                                receivers.push(givers[((i + 1) % len)])
-                            }
-                        }
-                        console.log(givers);
-                        console.log(receivers);
-                        for (j = 0; j < len; j++) {
-                            var assignment = {};
-                            assignment.groupID = vm.group._id;
-                            assignment.groupName = vm.group.groupName;
-                            assignment.giverID = givers[j];
-                            assignment.giverName = getUserName(givers[j]);
-                            console.log(assignment.giverName);
-                            assignment.receiverID = receivers[j];
-                            assignment.receiverName = getUserName(receivers[j]);
-                            console.log(assignment.receiverName);
-                            AssignmentService
-                                .createAssignment(assignment);
-                            // do I need to handle the result of this call?
+                            UserService
+                                .findUsersByIds(givers)
+                                .then(function(response) {
+                                    var users = response.data;
+                                    var giverNames = users.map(getUserName);
+                                    console.log(givers);
+                                    console.log(giverNames);
+                                    var len = givers.length;
+                                    var receivers = [];
+                                    var receiverNames = [];
+                                    for (i = 0; i < len; i++) {
+                                        receivers.push(givers[((i + 1) % len)]);
+                                        receiverNames.push(giverNames[((i + 1) % len)]);
+                                    }
+                                    console.log(receivers);
+                                    console.log(receiverNames);
+                                    for (j = 0; j < len; j++) {
+                                        var assignment = {};
+                                        assignment.groupID = vm.group._id;
+                                        assignment.groupName = vm.group.groupName;
+                                        assignment.giverID = givers[j];
+                                        assignment.giverName = giverNames[j];
+                                        console.log(assignment.giverName);
+                                        assignment.receiverID = receivers[j];
+                                        assignment.receiverName = receiverNames[j];
+                                        console.log(assignment.receiverName);
+                                        AssignmentService
+                                            .createAssignment(assignment);
+                                        // do I need to handle the result of this call?
+                                    }
+                                })
                         }
                     }
                 });
@@ -142,7 +147,7 @@
                         newGroup.eventDate = group.eventDate;
                         newGroup.priceRange = group.priceRange;
                         GroupService
-                            .updateGroup(newGroup)
+                            .updateGroup(group._id, newGroup)
                             .then(
                                 function (response) {
                                     var res = response.data;
@@ -191,8 +196,8 @@
             console.log(vm.invitedEmail);
             UserService
                 .findUserByEmail(vm.invitedEmail)
-                .then(function (user) {
-                        vm.invitedUser = user;
+                .then(function (response) {
+                        vm.invitedUser = response.data;
                     
                     if (!vm.invitedUser) {
                         $rootScope.errorMessage = "No user found with that email address."

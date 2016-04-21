@@ -18,7 +18,7 @@ do that from the details page as well. Want to create a new group? Click the "Cr
             {{group.groupName}}</a></td>
         <td><a href="#/user-details/{{group.groupLeaderID}}">
             {{group.groupLeaderName}}</a></td>
-        <td>{{group.eventDate}}</td>
+        <td>{{group.eventDate | date }}</td>
     </tr>
     </tbody>
 

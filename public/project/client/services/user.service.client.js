@@ -17,11 +17,15 @@
             findUserById: findUserById,
             findUsersByGroup: findUsersByGroup,
             findAllUsersSafe: findAllUsersSafe,
-            findUserByEmail: findUserByEmail
+            findUserByEmail: findUserByEmail,
+            findUsersByIds: findUsersByIds
 
         };
         return api;
         
+        function findUsersByIds(userIDs) {
+            return $http.post("/api/pollyanna/user/array", {userIDs: userIDs});
+        }
 
         function findUsersByGroup(groupID) {
             return $http.get("/api/pollyanna/user/array/"+groupID);
