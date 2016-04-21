@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="invite in model.invites">
-        <td>{{invite.senderName}}</td>
+        <td><a href="#/user-details/{{invite.senderID}}">{{invite.senderName}}</a></td>
         <td>{{invite.groupName}}</td>
         <td>
         <button ng-click="model.declineInvite(invite)" class="btn btn-danger">X</button>
