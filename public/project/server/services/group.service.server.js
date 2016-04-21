@@ -24,9 +24,6 @@ module.exports = function(app, groupModel, userModel) {
             groupModel.createGroup(newGroup)
                 .then(
                     function (group) {
-                        return group;
-                    })
-                .then(function (group) {
                         userModel
                             .findUserById(newGroup.groupLeaderID)
                             .then(
@@ -40,16 +37,15 @@ module.exports = function(app, groupModel, userModel) {
                     },
                     function (err) {
                         res.status(400).send(err);
-                    }
-                )
-                .then(
-                    function (groups) {
-                        res.json(groups);
-                    },
-                    function (err) {
-                        res.status(400).send(err);
-                    }
-                );
+                    })
+                    .then(
+                        function (groups) {
+                            res.json(groups);
+                        },
+                        function (err) {
+                            res.status(400).send(err);
+                        }
+                    );
     }
             
     

@@ -3,7 +3,7 @@
         .module("PollyannaApp")
         .controller("GroupDetailsController", groupDetailsController);
 
-    function groupDetailsController(InviteService, UserService, GroupService, $routeParams, $rootScope, $location) {
+    function groupDetailsController(AssignmentService, InviteService, UserService, GroupService, $routeParams, $rootScope, $location) {
         var vm = this;
         vm.currentUser = $rootScope.currentUser;
         vm.leaderMode = null;
@@ -62,44 +62,56 @@
         }
 
         function getUserName(userID) {
-            var user = null;
-            
+            var name = null;
             UserService
                 .findUserById(userID)
                 .then(function(response) {
-                    user = response.data;
+                    var user = response.data;
+                    name = user.firstName + " " + user.lastName;
                 });
-            var name = user.firstName + " " + user.lastName;
             return name;
         }
 
         function generateAssignments() {
-            if ((vm.group.members.length) < 3) {
-                vm.assignmentErrorMessage = "You need at least 3 members to generate assignments. Invite some more!"
-            }
-            else {
-                var givers = vm.group.members.slice();
-                shuffle(givers);
-                var len = length(givers);
-                var receivers = [];
-                for (i = 0; i < len; i++) {
-                    receivers.push(givers[((i + 1) % len)])
-                }
-            }
-            console.log(givers);
-            console.log(receivers);
-            for (j = 0; j < len; j++) {
-                var assignment = {};
-                assignment.groupID = vm.group._id;
-                assignment.groupName = vm.group.groupName;
-                assignment.giverID = givers[j];
-                assignment.giverName = getUserName(givers[j]);
-                assignment.receiverID = receivers[j];
-                assignment.receiverName = getUserName(receivers[j]);
-                AssignmentService
-                    .createAssignment(assignment);
-                // do I need to handle the result of this call?
-            }
+            AssignmentService
+                .findAssignmentsByGroupId(vm.group._id)
+                .then(function(response) {
+                    console.log(response.data);
+                    if (response.data) {
+                        vm.assignmentErrorMessage = "You've already created assignments for this group!"
+                    }
+                    else {
+                        console.log("generating assignments");
+                        if ((vm.group.members.length) < 3) {
+                            vm.assignmentErrorMessage = "You need at least 3 members to generate assignments. Invite some more!"
+                        }
+                        else {
+                            var givers = vm.group.members.slice();
+                            shuffle(givers);
+                            var len = givers.length;
+                            var receivers = [];
+                            for (i = 0; i < len; i++) {
+                                receivers.push(givers[((i + 1) % len)])
+                            }
+                        }
+                        console.log(givers);
+                        console.log(receivers);
+                        for (j = 0; j < len; j++) {
+                            var assignment = {};
+                            assignment.groupID = vm.group._id;
+                            assignment.groupName = vm.group.groupName;
+                            assignment.giverID = givers[j];
+                            assignment.giverName = getUserName(givers[j]);
+                            console.log(assignment.giverName);
+                            assignment.receiverID = receivers[j];
+                            assignment.receiverName = getUserName(receivers[j]);
+                            console.log(assignment.receiverName);
+                            AssignmentService
+                                .createAssignment(assignment);
+                            // do I need to handle the result of this call?
+                        }
+                    }
+                });
         }
         
         
@@ -127,7 +139,7 @@
                         newGroup.groupLeaderID = vm.currentUser._id;
                         newGroup.groupLeaderName = vm.currentUser.firstName + " " + vm.currentUser.lastName;
                         newGroup.members = [vm.currentUser._id];
-                        newGroup.eventDate = group.eventDate.toString();
+                        newGroup.eventDate = group.eventDate;
                         newGroup.priceRange = group.priceRange;
                         GroupService
                             .updateGroup(newGroup)

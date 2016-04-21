@@ -163,6 +163,10 @@ module.exports = function(app, userModel, groupModel) {
         if(typeof newUser.groups == "string") {
             newUser.groups = newUser.groups.split(",");
         }
+        else {
+            newUser.groups = [];
+        }
+
 
         userModel
             .findUserByEmail(newUser.email)

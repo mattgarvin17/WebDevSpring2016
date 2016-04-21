@@ -27,13 +27,18 @@
         {
             GiftService
                 .deleteGift(gift._id)
-                .then(handleSuccess, handleError);
+                .then(init, handleError);
         }
 
         function updateGift(gift)
         {
+            var newGift = {};
+            newGift.itemName = gift.itemName;
+            newGift.price = gift.price;
+            newGift.itemDescription = gift.itemDescription;
+            newGift.itemLink = gift.itemLink;
             GiftService
-                .updateGift(gift._id, gift)
+                .updateGift(gift._id, newGift)
                 .then(init, handleError);
             vm.gift = null;
 

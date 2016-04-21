@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 
 module.exports = function(app, assignmentModel) {
     
-    app.post("/api/pollyanna/assignment", createAssignment); 
-    app.put("/api/pollyanna/assignment/:id", updateAssignment);
-    app.delete("/api/pollyanna/assignment/:id", deleteAssignment);
+    app.post("/api/pollyanna/assignment", createAssignment);
     app.get("/api/pollyanna/assignment", findAllAssignments);
     app.get("/api/pollyanna/assignment/:id", findAssignmentById);
     app.get("/api/pollyanna/assignment/group/:groupID", findAllAssignmentsByGroupId);
     app.get("/api/pollyanna/assignment/giver/:giverID", findAllAssignmentsByGiverId);
+    app.put("/api/pollyanna/assignment/:id", updateAssignment);
+    app.delete("/api/pollyanna/assignment/:id", deleteAssignment);
 
     function createAssignment(req, res) {
         var newAssignment = req.body;
